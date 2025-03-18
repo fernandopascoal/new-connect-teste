@@ -12,7 +12,7 @@ const HomePage = () => {
       <h1>Bem-vindo ao Consumidor do SDK</h1>
       <Hello />
       <BaseButton size='large' variant='outlined' type='button' fullWidth>
-        Teste new SDK
+        Teste new SDK 18.20.7
       </BaseButton> 
     </div>
   );
