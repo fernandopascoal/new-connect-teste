@@ -269,7 +269,7 @@ const StyleConfigFoodbusters: IStyleConnectConfigAll = {
   termsLink: 'https://www.eventix.ai/termos-de-uso',
   connectBaseUrl:
     process.env.NEXT_PUBLIC_ENVIRONMENT != 'production'
-      ? 'https://foodbusters.w3block.io/'
+      ? 'https://foodbusters.stg.w3block.io/'
       : 'https://foodbusters.com.br/',
   header: {
     backgroundColor: 'white',

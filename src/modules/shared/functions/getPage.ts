@@ -13,7 +13,7 @@ export async function GetPage(href: string, token = '') {
     process.env.NEXT_PUBLIC_ENVIRONMENT != 'development'
       ? href.replace(
           'https://localhost:3000',
-          'https://foodbusters.w3block.io'
+          'https://foodbusters.stg.w3block.io'
         ) +
         '?t=' +
         Date.now()
