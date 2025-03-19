@@ -12,19 +12,18 @@
     "node": "18.x"
   },
   "dependencies": {
-    "@w3block/w3block-ui-sdk": "^1.16.1-alpha.0",
-    "new-sdk-w3block": "^1.0.2",
+    "@w3block/w3block-ui-sdk": "^1.16.1-alpha.1",
     "next": "15.2.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
     "tailwindcss": "^4",
