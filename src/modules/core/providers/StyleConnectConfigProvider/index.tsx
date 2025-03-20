@@ -5,7 +5,6 @@ import {
   StyleConnectConfigDefault,
   StyleConnectConfigsPreDefined,
 } from '../../const/StyleConnectConfigThemes';
-import { useGetInfoByHostname } from '../../hooks/useGetInfoByHostname/useGetInfoByHostname';
 import { IStyleConnectConfigAll } from '../../interfaces/IStyleConnectConfigContext';
 import { convertRGBToBrandCssValue } from '../../utils/convertRGBToBrandCssValue';
 
@@ -20,12 +19,35 @@ export const StyleConnectConfigContext = createContext<
 const StyleConnectConfigProvider = ({
   children,
 }: StyleConnectConfigProviderProps) => {
-  const { data, isLoading } = useGetInfoByHostname();
   const [config, setConfig] = useState<IStyleConnectConfigAll | undefined>();
   const { hostname } = useLocation();
   const [companyInfo, setCompanyInfo] = useLocalStorage<IStyleConnectConfigAll>(
     hostname ?? ''
   );
+
+  const data = {
+    "id": "cff66c4a-32ad-4a09-8acd-3bf5aa6197ad",
+    "name": "Foodbuster",
+    "info": {},
+    "hosts": [
+        {
+            "hostname": "foodbusters.stg.w3block.io",
+            "isMain": true
+        }
+    ],
+    "configuration": {
+        "passwordless": {
+            "enabled": false
+        },
+        "googleSignIn": {
+            "enabled": true,
+            "requireReferrer": false
+        },
+        "appleSignIn": {
+            "enabled": false
+        }
+    }
+}
 
   useEffect(() => {
     if (companyInfo) {
@@ -35,7 +57,7 @@ const StyleConnectConfigProvider = ({
   }, []);
 
   useEffect(() => {
-    if (!isLoading && data?.id) {
+    if ( data?.id) {
       const style = StyleConnectConfigsPreDefined.find(
         (style) => style.companyId === data.id
       ) ?? {
@@ -48,7 +70,7 @@ const StyleConnectConfigProvider = ({
       setConfig(style);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, []);
 
   useEffect(() => {
     if (document) {

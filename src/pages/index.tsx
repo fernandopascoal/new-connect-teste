@@ -10,18 +10,15 @@ import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { GetPage } from '../modules/shared/functions/getPage';
 import { GetTheme } from '../modules/shared/functions/getTheme';
+import { page, theme } from '../modules/shared/mock/page';
 
 
 
 const HomePage = ({
   params,
-  theme,
-  page,
   url,
 }: {
   params: string[];
-  theme: any;
-  page: any;
   url: string;
 }) => {
   if (theme?.data?.configurations?.contentData?.customFonts)
@@ -57,6 +54,7 @@ const HomePage = ({
     },
   };
 
+
   page?.data?.metatags?.forEach(
     (item: { name: string; property: string; id: string }) => {
       const key = item?.name
@@ -69,6 +67,7 @@ const HomePage = ({
     }
   );
 
+
   return (
     <>
       <Head>
@@ -77,9 +76,7 @@ const HomePage = ({
             rel="icon"
             type="image/x-icon"
             href={
-              (theme?.data?.configurations?.styleData?.favicon?.assetUrl ||
-                theme?.data?.configurations?.styleData?.favicon) ??
-              ''
+              (theme?.data?.configurations?.styleData?.favicon?.assetUrl)
             }
           />
         )}
@@ -115,6 +112,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const returns: any = {};
   try {
     const pageCall = await GetPage(host, '');
+    console.log(pageCall, 'pageCall')
     returns.page = pageCall;
   } catch (error) {
     console.log(error);
@@ -122,6 +120,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   try {
     const theme = await GetTheme(host);
     returns.theme = theme;
+
+    console.log(theme, 'theme')
   } catch (error) {
     console.log(error);
   }
