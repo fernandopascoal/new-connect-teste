@@ -4,8 +4,6 @@ import { StorefrontPreview, ThemeProvider } from '@w3block/w3block-ui-sdk';
 import React from 'react';
 import '@w3block/w3block-ui-sdk/dist/style.css';
 
-import { loadFonts } from '../modules/core/utils/loadFonts';
-import { removeUndefinedOrEmpty } from '../modules/core/utils/removeUndefinedOrEmpty';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { GetPage } from '../modules/shared/functions/getPage';
@@ -16,58 +14,11 @@ import { page, theme } from '../modules/shared/mock/page';
 
 const HomePage = ({
   params,
-  url,
 }: {
   params: string[];
   url: string;
 }) => {
-  if (theme?.data?.configurations?.contentData?.customFonts)
-    loadFonts(theme?.data?.configurations?.contentData?.customFonts);
-
-  const metatags = {
-    'property-og:title': {
-      property: 'og:title',
-      content: theme?.data?.configurations?.styleData?.siteTitle ?? '',
-    },
-    'property-og:type': {
-      property: 'og:type',
-      content: 'article',
-    },
-    'property-og:description': {
-      property: 'og:description',
-      content: theme?.data?.configurations?.styleData?.ogDescription ?? '',
-    },
-    'property-og:image': {
-      property: 'og:image',
-      content:
-        (theme?.data?.configurations?.styleData?.ogImage?.assetUrl ||
-          theme?.data?.configurations?.styleData?.ogImage) ??
-        '',
-    },
-    'property-og:url': {
-      property: 'og:url',
-      content: url,
-    },
-    'name-twitter:card': {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
-  };
-
-
-  page?.data?.metatags?.forEach(
-    (item: { name: string; property: string; id: string }) => {
-      const key = item?.name
-        ? `name-${item.name}`
-        : item?.property
-        ? `property-${item.property}`
-        : `id-${item.id}`;
-
-      (metatags as any)[key] = item;
-    }
-  );
-
-
+ 
   return (
     <>
       <Head>
@@ -85,10 +36,7 @@ const HomePage = ({
             {theme?.data?.configurations?.styleData?.siteTitle ?? ''}
           </title>
         )}
-        {Object.keys(metatags).map((k) => {
-          const attributes = removeUndefinedOrEmpty((metatags as any)[k]);
-          return <meta key={k} {...attributes} />;
-        })}
+       
       </Head>
       <ThemeProvider
         upperPageInfo={page as any}
@@ -121,7 +69,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     const theme = await GetTheme(host);
     returns.theme = theme;
 
-    console.log(theme, 'theme')
   } catch (error) {
     console.log(error);
   }

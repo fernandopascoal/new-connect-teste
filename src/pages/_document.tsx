@@ -4,14 +4,13 @@
 import Document, { Html, Main, NextScript, Head } from 'next/document';
 import Script from 'next/script';
 
-import { GetTheme } from '../modules/shared/functions/getTheme';
+import { theme } from '../modules/shared/mock/page';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any): Promise<any> {
     const initialProps = await Document.getInitialProps(ctx);
-    const { req } = ctx;
-    const host = 'https://' + (req?.headers?.host ?? '');
-    const theme = await GetTheme(host).catch((e) => e.message);
+
+
     if (theme) {
       const data = await theme.data;
       return { ...initialProps, theme: data };
