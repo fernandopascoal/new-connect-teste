@@ -16,7 +16,9 @@ export const useGetInfoByHostname = () => {
       ? 'foodbusters.stg.w3block.io' //'hashdex.stg.w3block.io'
       : location;
   const apiUrl =
-    baseUrl + IdApiRoutes.TENANT_BY_HOSTNAME + '?hostname=' + hostname;
+    'https://pixwayid.stg.w3block.io/' + IdApiRoutes.TENANT_BY_HOSTNAME + '?hostname=' + hostname;
+
+    console.log(apiUrl, 'apiUrl')
   return useQuery(
     apiUrl,
     async (): Promise<IcompanyInfo> => {
