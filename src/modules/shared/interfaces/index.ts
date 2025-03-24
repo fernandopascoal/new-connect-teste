@@ -1,10 +1,5 @@
-import {
-  Actions,
-  ColumnsTable,
-  DataSource,
-  TableStylesClasses,
-  XlsReportsDto,
-} from '../../shared/interface/ConfigGenericTable';
+import { Actions, ColumnsTable, DataSource, TableStylesClasses, XlsReportsDto } from "./ConfigGenericTable";
+
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type TemplateData = {
