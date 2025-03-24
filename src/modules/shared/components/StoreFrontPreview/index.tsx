@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import {
     ReactNode,
     useContext,
@@ -7,7 +7,7 @@ import {
     useState,
     Suspense,
   } from 'react';
-  import { useEffectOnce, useLocation } from 'react-use';
+  import { useEffectOnce } from 'react-use';
   
   import classNames from 'classnames';
 
@@ -48,15 +48,14 @@ import { ThemeContext } from '../../contexts/ThemeContext';
   // };
   
   export const StorefrontPreview = ({
-    params,
     children,
   }: StorefrontPreviewProps) => {
     const context = useContext(ThemeContext);
 
     const locale = useLocale();
 /*     const { setMainCoin } = useUserWallet(); */
-    const { host } = useLocation();
-    const { asPath, pushConnect } = useRouterConnect();
+   /*  const { host } = useLocation(); */
+    const { asPath } = useRouterConnect();
     const [currentPage, setCurrentPage] = useState<TemplateData | null>(null);
     const [themeListener, setThemeListener] = useState<Theme | null>();
     const [currentHighlight, setCurrentHighlight] = useState('');
