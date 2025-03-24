@@ -1,3 +1,4 @@
+
 import {
     createContext,
     Dispatch,
@@ -45,7 +46,10 @@ import { useGetPageModules } from '../hooks/useGetPageModules';
     const [pageTheme, setPageTheme] = useState<TemplateData | null>(null);
     const [pageThemeSession, setPageThemeSession] =
       useSessionStorage<TemplateData | null>(BASE_THEME_KEY);
-    const [_, setPageName] = useState('');
+    const [pageName, setPageName] = useState('');
+
+    console.log(pageName)
+    
     useEffect(() => {
       if (upperTheme) {
         setDefaultTheme(upperTheme);
