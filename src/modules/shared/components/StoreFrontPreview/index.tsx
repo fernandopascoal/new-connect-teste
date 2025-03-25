@@ -1,9 +1,9 @@
+/* eslint-disable prefer-const */
 
 import {
     ReactNode,
     useContext,
     useEffect,
-    useMemo,
     useState,
     Suspense,
   } from 'react';
@@ -15,15 +15,17 @@ import {
 
 /*   import { getProductSlug } from '../utils/getProductSlug'; */
 /*   import { PassBenefit } from './PassBenefit'; */
-import { Accordions, Banner, BannerWJJC, Footer, GenericTableWrapper, GridItemArea, Header, ImagePlusText, Midia, Page404, Paragraph, PassBenefit, Products } from '@w3block/w3block-ui-sdk';
+
 import { useLocale } from '../../hooks/useLocale';
 import { breakpointsEnum, useBreakpoints } from '../../hooks/useBreakpoints/useBreakpoints';
-import { useRouterConnect } from '../../hooks/useRouterConnect';
-import { DynamicApiModuleInterface, MainModuleThemeInterface, ModulesType, TemplateData, Theme } from '../../interfaces';
+/* import { useRouterConnect } from '../../hooks/useRouterConnect'; */
+import {  ModulesType, TemplateData, Theme } from '../../interfaces';
 
 import { DynamicApiProvider } from '../../providers/DynamicApiProvider';
 import { convertSpacingToCSS } from '../../utils/convertSpacingToCSS';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import { Banner } from '../Banner/Banner';
+import { ImagePlusText } from '../ImagePlusText/ImagePlusText';
   
 
   
@@ -55,7 +57,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
     const locale = useLocale();
 /*     const { setMainCoin } = useUserWallet(); */
    /*  const { host } = useLocation(); */
-    const { asPath } = useRouterConnect();
+ /*    const { asPath } = useRouterConnect(); */
     const [currentPage, setCurrentPage] = useState<TemplateData | null>(null);
     const [themeListener, setThemeListener] = useState<Theme | null>();
     const [currentHighlight, setCurrentHighlight] = useState('');
@@ -140,7 +142,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
   
     const themeContext = context?.defaultTheme;
   
-    const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
+/*     const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
       if (context?.pageInfo && context.pageInfo.isRoutePatternRegex) {
         return {
           regexp: context.pageInfo.routePatternRegex,
@@ -160,7 +162,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
         };
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [context?.pageInfo, data]);
+    }, [context?.pageInfo, data]); */
   
     const breakpoint = useBreakpoints();
     const mobileBreakpoints = [breakpointsEnum.SM, breakpointsEnum.XS];
@@ -180,14 +182,14 @@ import { ThemeContext } from '../../contexts/ThemeContext';
       ? `"${fontName}", ${fontName === 'Aref Ruqaa' ? 'serif' : 'sans-serif'}`
       : 'sans-serif';
   
-    const headerStyleData = theme.header?.styleData;
+/*     const headerStyleData = theme.header?.styleData;
     const headerMobileStyleData = theme.header?.mobileStyleData;
-  
-    const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
+   */
+/*     const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
       ? { ...headerStyleData, ...headerMobileStyleData }
-      : headerStyleData;
+      : headerStyleData; */
   
-    const headerData = context?.defaultTheme?.header
+ /*    const headerData = context?.defaultTheme?.header
       ? {
           ...theme.header,
           styleData: { ...mergedHeaderStyleData, fontFamily },
@@ -197,9 +199,9 @@ import { ThemeContext } from '../../contexts/ThemeContext';
           name: 'header',
           type: ModulesType.HEADER,
           styleData: {},
-        };
+        }; */
   
-    const hasHeaderDefault =
+/*     const hasHeaderDefault =
       mergedConfigStyleData?.hasHeader != undefined &&
       (asPath || '').includes('/auth/')
         ? mergedConfigStyleData?.hasHeader
@@ -213,7 +215,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
     data = {
       ...data,
       dynamicApi,
-    };
+    }; */
   
     return (
       <Suspense
@@ -230,9 +232,9 @@ import { ThemeContext } from '../../contexts/ThemeContext';
               fontFamily,
             }}
           >
-            {hasHeaderDefault && headerData ? (
+           {/*  {hasHeaderDefault && headerData ? (
               <Header data={headerData as MainModuleThemeInterface} />
-            ) : null}
+            ) : null} */}
   
            {/*  <Cookies
               data={
@@ -248,7 +250,8 @@ import { ThemeContext } from '../../contexts/ThemeContext';
               }
             /> */}
             {context?.isError && !children ? (
-              <Page404 />
+              <></>
+              
             ) : (
               <>
               {/*   {productSlug && (
@@ -299,21 +302,21 @@ import { ThemeContext } from '../../contexts/ThemeContext';
                           return <Menu data={{ ...theme.categories, ...item }} />; */
                         case ModulesType.BANNER:
                           return <Banner data={{ ...theme.banner, ...item }} />;
-                        case ModulesType.CARDS:
+                       /*  case ModulesType.CARDS:
                           return (
                             <Products data={{ ...theme.products, ...item }} />
-                          );
-                        case ModulesType.ACCORDIONS:
+                          ); */
+                       /*  case ModulesType.ACCORDIONS:
                           return (
                             <Accordions data={{ ...theme.accordions, ...item }} />
-                          );
+                          ); */
                         case ModulesType.IMAGE_PLUS_TEXT:
                           return (
                             <ImagePlusText
                               data={{ ...theme.imagePlusText, ...item }}
                             />
                           );
-                        case ModulesType.PARAGRAPH:
+                       /*  case ModulesType.PARAGRAPH:
                           return (
                             <Paragraph data={{ ...theme.paragraph, ...item }} />
                           );
@@ -332,17 +335,17 @@ import { ThemeContext } from '../../contexts/ThemeContext';
                         case ModulesType.MIDIA:
                           return <Midia data={{ ...theme.midia, ...item }} />;
                         case ModulesType.TABLE:
-                          return <GenericTableWrapper data={{ ...item }} />;
+                          return <GenericTableWrapper data={{ ...item }} />; */
                         /* case ModulesType.BANNER_VARIANT:
                           return (
                             <BannerVariant
                               data={{ ...theme.bannerVariant, ...item }}
                             />
                           ); */
-                        case ModulesType.BANNER_WJJC:
+                        /* case ModulesType.BANNER_WJJC:
                           return (
                             <BannerWJJC data={{ ...theme.bannerWjjc, ...item }} />
-                          );
+                          ); */
   
                         default:
                           break;
@@ -352,7 +355,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
                 )}
               </>
             )}
-            {hasFooterDefault && (
+           {/*  {hasFooterDefault && (
               <Footer
                 data={
                   theme.footer ?? {
@@ -366,7 +369,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
                   }
                 }
               />
-            )}
+            )} */}
           </div>
         </DynamicApiProvider>
       </Suspense>
