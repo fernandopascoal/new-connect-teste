@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React from "react";
-import "@w3block/w3block-ui-sdk/dist/style.css";
+
 
 import Head from "next/head";
 import { GetServerSideProps } from "next";

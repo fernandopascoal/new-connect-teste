@@ -2,8 +2,9 @@
 import { CSSProperties, lazy } from 'react';
 
 import _ from 'lodash';
-import { Navigation, Pagination, Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { Swiper, SwiperSlide,  } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 //import { ImageSDK } from '../../shared/components/ImageSDK';
 const ImageSDK = lazy(() =>
