@@ -1,4 +1,6 @@
-import { ContentTypeEnum, position } from '@w3block/w3block-ui-sdk';
+import { ContentTypeEnum } from "../../shared/enums/contentType";
+import { position } from "../../shared/enums/styleConfigs";
+
 
 export interface IStyleConnectConfigAll {
   companyId: string;

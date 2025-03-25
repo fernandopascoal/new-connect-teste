@@ -1,7 +1,9 @@
-import { ContentTypeEnum, position } from '@w3block/w3block-ui-sdk';
+
 
 import LogoFoodbusters from '../../shared/assets/logos/fooodbusters_logo.png';
 import LogoStoryChain from '../../shared/assets/logos/logo_storychain.png';
+import { ContentTypeEnum } from '../../shared/enums/contentType';
+import { position } from '../../shared/enums/styleConfigs';
 import { IStyleConnectConfigAll } from '../interfaces/IStyleConnectConfigContext';
 
 export const StyleConnectConfigDefault: IStyleConnectConfigAll = {

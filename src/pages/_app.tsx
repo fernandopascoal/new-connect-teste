@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "@w3block/w3block-ui-sdk/dist/style.css";
 import "../../styles/globals.css";
 
 import { useRef } from "react";
