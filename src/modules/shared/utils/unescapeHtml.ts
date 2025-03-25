@@ -12,6 +12,7 @@ export function unescapeHtml(input: string) {
   };
   text = text.replace(
     /&(nbsp|amp|lt|gt|quot|#039|apos);/g,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (match) => (specialEntities as any)[match] || match
   );
   return text;
