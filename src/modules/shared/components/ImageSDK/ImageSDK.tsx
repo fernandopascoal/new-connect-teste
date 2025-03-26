@@ -50,9 +50,9 @@ export const ImageSDK = ({
           alt={alt}
           className={className}
           ref={preImageRef}
-          width={width}
-          height={height}
-          fill
+          width={600}
+          height={300}
+          
         />
 
         <video
@@ -92,9 +92,8 @@ export const ImageSDK = ({
           alt={alt}
           className={className}
           ref={preImageRef}
-          width={width}
-          height={height}
-          fill
+          width={600}
+          height={300}
           onError={() => setError(true)}
         />
         <Image
@@ -109,9 +108,8 @@ export const ImageSDK = ({
           alt={alt}
           className={className}
           ref={imageRef}
-          width={width}
-          height={height}
-          fill
+          width={600}
+          height={300}
           onError={() => setError(true)}
           onLoad={() => {
             if (imageRef.current && preImageRef.current) {
@@ -132,9 +130,8 @@ export const ImageSDK = ({
           alt={alt}
           className={`${className}`}
           src={imagePlaceholder}
-          width={width}
-          height={height}
-          fill
+          width={600}
+          height={300}
         />
       );
     } else if (isCloud) {
@@ -158,9 +155,8 @@ export const ImageSDK = ({
           alt={alt}
           className={`${className}`}
           src={isError ? imagePlaceholder : src ?? ""}
-          width={width}
-          height={height}
-          fill
+          width={600}
+          height={300}
         />
       );
     }
