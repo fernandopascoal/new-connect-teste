@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CSSProperties, lazy } from 'react';
+import { CSSProperties } from 'react';
 
 import _ from 'lodash';
 
@@ -7,11 +7,11 @@ import { Swiper, SwiperSlide,  } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 //import { ImageSDK } from '../../shared/components/ImageSDK';
-const ImageSDK = lazy(() =>
+/* const ImageSDK = lazy(() =>
   import('../ImageSDK').then((module) => ({
     default: module.ImageSDK,
   }))
-);
+); */
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -24,7 +24,8 @@ import { useDynamicString } from '../../hooks/useDynamicString';
 import { breakpointsEnum, useBreakpoints } from '../../hooks/useBreakpoints/useBreakpoints';
 import { composeUrlCloudinary } from '../../utils/composeUrlCloudinary';
 import { isImage, isVideo } from '../../utils/validators';
-import { AlignmentEnum, BannerData, SpecificBannerInfo } from '../../interfaces';
+import { BannerData, SpecificBannerInfo } from '../../interfaces';
+import Image from 'next/image';
 
 export const Banner = ({ data }: { data: BannerData }) => {
   const { styleData, mobileStyleData, id } = data;
@@ -110,8 +111,8 @@ export const Banner = ({ data }: { data: BannerData }) => {
 
 const Slide = ({
   data,
-  ratioClassName,
-  height,
+ /*  ratioClassName,
+  height, */
 }: {
   data: SpecificBannerInfo;
   ratioClassName?: string;
@@ -119,26 +120,26 @@ const Slide = ({
   layoutClass?: string;
 }) => {
   const {
-    titleColor,
+/*     titleColor,
     subtitleColor,
     backgroundColor,
     buttonColor,
-    buttonTextColor,
-    textAligment,
+    buttonTextColor, */
+/*     textAligment, */
     buttonLink,
-    overlayColor,
+ /*    overlayColor, */
     backgroundUrl,
     backgroundUrlMobile,
-    title: titleRaw,
-    padding,
-    overlay,
-    buttonText,
+/*     title: titleRaw, */
+/*     padding,
+    overlay, */
+/*     buttonText, */
     actionButton,
-    subtitle: subtitleRaw,
-    secondaryActionButton,
-    secondaryButtonText,
-    secondaryButtonLink,
-    secondaryButtonTextColor,
+  /*   subtitle: subtitleRaw, */
+/*     secondaryActionButton, */
+/*     secondaryButtonText,
+    secondaryButtonLink, */
+/*     secondaryButtonTextColor,
     secondaryButtonColor,
     buttonBorderColor,
     secondaryButtonBorderColor,
@@ -163,21 +164,21 @@ const Slide = ({
     buttonSize,
     secondaryButtonSize,
     titleWidth,
-    imageRounded,
+    imageRounded, */
     imageCompression,
   } = data;
 
   const { isDynamic, datasource } = useDynamicApi();
-  const { text: title } = useDynamicString(titleRaw);
-  const { text: subtitle } = useDynamicString(subtitleRaw);
+/*   const { text: title } = useDynamicString(titleRaw);
+  const { text: subtitle } = useDynamicString(subtitleRaw); */
   const { text: primaryLink } = useDynamicString(buttonLink);
-  const { text: secondaryLink } = useDynamicString(secondaryButtonLink);
+/*   const { text: secondaryLink } = useDynamicString(secondaryButtonLink);
   const { text: primaryText } = useDynamicString(buttonText);
   const { text: secondaryText } = useDynamicString(secondaryButtonText);
   const rowAlignmentClass = rowAlignments[textAligment ?? AlignmentEnum.LEFT];
   const columnAlignmentClass =
     columnAlignments[textAligment ?? AlignmentEnum.LEFT];
-  const alignmentTextClass = alignmentsText[textAligment ?? AlignmentEnum.LEFT];
+  const alignmentTextClass = alignmentsText[textAligment ?? AlignmentEnum.LEFT]; */
   const breakpoint = useBreakpoints();
   const bgUrl =
     backgroundUrlMobile &&
@@ -192,17 +193,19 @@ const Slide = ({
       quality: imageCompression ? imageCompression : 'best',
     },
   });
-  const bg = `${
+  const bg = isDynamic
+  ? _.get(datasource, bgUrl?.assetUrl ?? '', bgUrlThreath)
+  : bgUrlThreath /* `${
     overlay && overlayColor
       ? `linear-gradient(${overlayColor},${overlayColor}),`
       : ''
   } url("${
-    isDynamic
-      ? _.get(datasource, bgUrl?.assetUrl ?? '', bgUrlThreath)
-      : bgUrlThreath
-  }") no-repeat center`;
+    
+  }") no-repeat center` */;
 
-  const getButtonPadding = (fontSize: string) => {
+  console.log(bg, 'bg')
+
+/*   const getButtonPadding = (fontSize: string) => {
     if (fontSize == '12px') {
       return '8px 20px';
     } else if (fontSize == '14px') {
@@ -215,14 +218,15 @@ const Slide = ({
       return '14px 32px';
     }
   };
-
+ */
   return (
     <a
       href={
         actionButton && buttonLink && buttonLink != '' ? primaryLink : undefined
       }
     >
-      <div
+      <Image alt='' src={bg} fill={true} />
+{/*       <div
         style={{
           backgroundSize: 'cover',
           backgroundColor: backgroundColor,
@@ -454,7 +458,7 @@ const Slide = ({
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </a>
   );
 };
@@ -467,7 +471,7 @@ const ratios: Record<string, string> = {
   '20:9': 'pw-aspect-[20/9]',
 };
 
-const rowAlignments: AlignmentClassNameMap = {
+/* const rowAlignments: AlignmentClassNameMap = {
   left: 'pw-justify-start',
   right: 'pw-justify-end',
   center: 'pw-justify-center',
@@ -481,8 +485,8 @@ const alignmentsText: AlignmentClassNameMap = {
   left: 'pw-text-left',
   right: 'pw-text-right',
   center: 'pw-text-center',
-};
-type AlignmentClassNameMap = Record<AlignmentEnum, string>;
+}; */
+/* type AlignmentClassNameMap = Record<AlignmentEnum, string>; */
 
 export const guessMediaType = (media: string) => {
   if (!media) return 'no-media';
