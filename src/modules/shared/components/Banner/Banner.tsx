@@ -225,7 +225,7 @@ const Slide = ({
         actionButton && buttonLink && buttonLink != '' ? primaryLink : undefined
       }
     >
-      <Image alt='' src={bg} fill={true} />
+      <Image alt='' src={bg} height={600} width={1900} />
 {/*       <div
         style={{
           backgroundSize: 'cover',
