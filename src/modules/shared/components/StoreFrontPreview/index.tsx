@@ -24,8 +24,8 @@ import {  ModulesType, TemplateData, Theme } from '../../interfaces';
 import { DynamicApiProvider } from '../../providers/DynamicApiProvider';
 import { convertSpacingToCSS } from '../../utils/convertSpacingToCSS';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import { Banner } from '../Banner/Banner';
 import { ImagePlusText } from '../ImagePlusText/ImagePlusText';
+import { Banner } from '../Banner/Banner';
   
 
   
@@ -300,7 +300,7 @@ import { ImagePlusText } from '../ImagePlusText/ImagePlusText';
                       switch (item.type) {
                    /*      case ModulesType.CATEGORIES:
                           return <Menu data={{ ...theme.categories, ...item }} />; */
-                        case ModulesType.BANNER:
+                       case ModulesType.BANNER:
                           return <Banner data={{ ...theme.banner, ...item }} />;
                        /*  case ModulesType.CARDS:
                           return (
