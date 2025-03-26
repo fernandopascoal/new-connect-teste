@@ -45,7 +45,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   const returns: any = {};
   try {
     const pageCall = await GetPage(host, "");
-    console.log(pageCall, "pageCall");
     returns.page = pageCall;
   } catch (error) {
     console.log(error);

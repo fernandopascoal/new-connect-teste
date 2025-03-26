@@ -1,7 +1,8 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from "react";
 
-import { composeUrlCloudinary } from '../../utils/composeUrlCloudinary';
-import { isCloudinary, isVideo } from '../../utils/validators';
+import { composeUrlCloudinary } from "../../utils/composeUrlCloudinary";
+import { isCloudinary, isVideo } from "../../utils/validators";
+import Image from "next/image";
 
 interface ImageSDKProps extends ImageSDKInternalProps {
   src?: string;
@@ -13,41 +14,47 @@ interface ImageSDKProps extends ImageSDKInternalProps {
 interface ImageSDKInternalProps {
   width?: number;
   height?: number;
-  quality?: 'best' | 'good' | 'eco' | 'no-compression';
-  fit?: 'fill' | 'fit';
+  quality?: "best" | "good" | "eco" | "no-compression";
+  fit?: "fill" | "fit";
 }
 
 const imagePlaceholder =
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png';
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png";
 
 export const ImageSDK = ({
   src,
-  className = '',
+  className = "",
   width,
   height,
-  quality = 'good',
-  fit = 'fill',
-  alt = '',
+  quality = "good",
+  fit = "fill",
+  alt = "",
   controls = false,
 }: ImageSDKProps) => {
   const preImageRef = useRef<HTMLImageElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const isCloud = isCloudinary(src ?? '');
-  const isVid = isVideo(src ?? '');
+  const isCloud = isCloudinary(src ?? "");
+  const isVid = isVideo(src ?? "");
   const [isError, setError] = useState(false);
+
+
   const VideoThreath = () => {
     return (
       <>
-        <img
+        <Image
+          src={composeUrlCloudinary({
+            src: src?.replace(".mp4", ".png") ?? "",
+            InternalProps: { width, height, quality, fit },
+          })}
           alt={alt}
           className={className}
           ref={preImageRef}
-          src={composeUrlCloudinary({
-            src: src?.replace('.mp4', '.png') ?? '',
-            InternalProps: { width, height, quality, fit },
-          })}
-        ></img>
+          width={width}
+          height={height}
+          fill
+        />
+
         <video
           className={className}
           ref={videoRef}
@@ -60,13 +67,13 @@ export const ImageSDK = ({
           playsInline
           onLoadedData={() => {
             if (videoRef.current && preImageRef.current) {
-              videoRef.current.style.display = 'block';
-              preImageRef.current.style.display = 'none';
+              videoRef.current.style.display = "block";
+              preImageRef.current.style.display = "none";
             }
           }}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           src={composeUrlCloudinary({
-            src: src ?? '',
+            src: src ?? "",
             InternalProps: { width, height, quality, fit },
           })}
         ></video>
@@ -77,41 +84,43 @@ export const ImageSDK = ({
   const ImageThreath = () => {
     return (
       <>
-        <img
+        <Image
+          src={composeUrlCloudinary({
+            src: src?.replace(".mp4", ".png") ?? "",
+            InternalProps: { width, height, quality, fit },
+          })}
           alt={alt}
           className={className}
           ref={preImageRef}
+          width={width}
+          height={height}
+          fill
           onError={() => setError(true)}
+        />
+        <Image
           src={
             isError
               ? imagePlaceholder
               : composeUrlCloudinary({
-                  src: src ?? '',
+                  src: src ?? "",
                   InternalProps: { width, height, quality, fit },
                 })
           }
-        ></img>
-        <img
           alt={alt}
           className={className}
           ref={imageRef}
+          width={width}
+          height={height}
+          fill
+          onError={() => setError(true)}
           onLoad={() => {
             if (imageRef.current && preImageRef.current) {
-              imageRef.current.style.display = 'block';
-              preImageRef.current.style.display = 'none';
+              imageRef.current.style.display = "block";
+              preImageRef.current.style.display = "none";
             }
           }}
-          onError={() => setError(true)}
-          style={{ display: 'none' }}
-          src={
-            isError
-              ? imagePlaceholder
-              : composeUrlCloudinary({
-                  src: src ?? '',
-                  InternalProps: { width, height, quality, fit },
-                })
-          }
-        ></img>
+          style={{ display: "none" }}
+        />
       </>
     );
   };
@@ -119,7 +128,14 @@ export const ImageSDK = ({
   return useMemo(() => {
     if (!src) {
       return (
-        <img alt={alt} className={`${className}`} src={imagePlaceholder}></img>
+        <Image
+          alt={alt}
+          className={`${className}`}
+          src={imagePlaceholder}
+          width={width}
+          height={height}
+          fill
+        />
       );
     } else if (isCloud) {
       return isVid ? <VideoThreath /> : <ImageThreath />;
@@ -135,15 +151,17 @@ export const ImageSDK = ({
           controls={controls}
           playsInline
           className={`${className}`}
-          src={src ?? ''}
+          src={src ?? ""}
         ></video>
       ) : (
-        <img
+        <Image
           alt={alt}
-          // onError={() => setError(true)}
           className={`${className}`}
-          src={isError ? imagePlaceholder : src ?? ''}
-        ></img>
+          src={isError ? imagePlaceholder : src ?? ""}
+          width={width}
+          height={height}
+          fill
+        />
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -63,7 +63,6 @@ import { Banner } from '../Banner/Banner';
     const [currentHighlight, setCurrentHighlight] = useState('');
  /*    const productSlug = getProductSlug(host + asPath); */
   
-    console.log(context, 'CONTEXT');
   
     const listener = ({
       data,
