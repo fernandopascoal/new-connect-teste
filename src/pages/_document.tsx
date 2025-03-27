@@ -1,31 +1,43 @@
 /* eslint-disable @next/next/next-script-for-ga */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Document, { Html, Main, NextScript, Head } from 'next/document';
-import Script from 'next/script';
-
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { theme } from '../modules/shared/mock/page';
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: any): Promise<any> {
+  static async getInitialProps(ctx: any) {
     const initialProps = await Document.getInitialProps(ctx);
 
-
+    // Obtendo o tema no servidor
+    let serverTheme = null;
     if (theme) {
-      const data = await theme.data;
-      return { ...initialProps, theme: data };
-    } else return initialProps;
+      try {
+        serverTheme = await theme.data; // Garantindo que o tema seja resolvido no servidor
+      } catch (error) {
+        console.error('Erro ao carregar o tema no servidor:', error);
+      }
+    }
+
+    return {
+      ...initialProps,
+      theme: serverTheme,
+    };
   }
+
   render() {
     const theme = (this.props as any).theme;
+
     return (
       <Html>
         <Head>
+          {/* Script para Google Maps API */}
           <script
             async
             type="text/javascript"
             src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
           ></script>
+
+          {/* Google Tag Manager */}
           {theme?.configurations?.gtmId && (
             <>
               <script
@@ -55,10 +67,10 @@ class MyDocument extends Document {
               />
             </>
           )}
+
+          {/* Meta Pixel */}
           {theme?.configurations?.metaEventsId && (
-            <Script
-              strategy="beforeInteractive"
-              id="gt-manager"
+            <script
               dangerouslySetInnerHTML={{
                 __html: `!function(f,b,e,v,n,t,s)
                 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -69,11 +81,12 @@ class MyDocument extends Document {
                 s.parentNode.insertBefore(t,s)}(window, document,'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
                 fbq('init', '${theme?.configurations?.metaEventsId}');
-                fbq('track', 'PageView');
-                `,
+                fbq('track', 'PageView');`,
               }}
             />
           )}
+
+          {/* Fontes */}
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
@@ -105,6 +118,7 @@ class MyDocument extends Document {
           />
         </Head>
         <body className="overflow-x-hidden">
+          {/* Noscript para Google Tag Manager */}
           {theme?.configurations?.gtmId && (
             <noscript>
               <iframe
@@ -115,6 +129,8 @@ class MyDocument extends Document {
               />
             </noscript>
           )}
+
+          {/* Noscript para Meta Pixel */}
           {theme?.configurations?.metaEventsId && (
             <noscript>
               <img
@@ -126,6 +142,7 @@ class MyDocument extends Document {
               />
             </noscript>
           )}
+
           <Main />
           <NextScript />
         </body>

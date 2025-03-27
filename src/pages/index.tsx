@@ -1,71 +1,65 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React from "react";
-
-
 import Head from "next/head";
 import { GetServerSideProps } from "next";
-import { GetPage } from "../modules/shared/functions/getPage";
-import { GetTheme } from "../modules/shared/functions/getTheme";
-import { theme } from "../modules/shared/mock/page";
 import { StorefrontPreview } from "../modules/shared/components/StoreFrontPreview";
-import { ThemeProvider } from "../modules/shared/contexts/ThemeContext";
 
-const HomePage = ({ params }: { params: string[]; url: string }) => {
+import { page, theme } from "../modules/shared/mock/page";
+
+interface HomePageProps {
+  params: string[];
+  url: string;
+  themeData: any; // Ajuste para tipagem adequada se necessário
+}
+
+const HomePage: React.FC<HomePageProps> = ({ params, themeData }) => {
   return (
     <>
       <Head>
-        {theme?.data?.configurations?.styleData?.favicon && (
+        {themeData?.data?.configurations?.styleData?.favicon && (
           <link
             rel="icon"
             type="image/x-icon"
-            href={theme?.data?.configurations?.styleData?.favicon?.assetUrl}
+            href={themeData.data.configurations.styleData.favicon.assetUrl}
           />
         )}
-        {theme?.data?.configurations?.styleData?.siteTitle && (
-          <title>
-            {theme?.data?.configurations?.styleData?.siteTitle ?? ""}
-          </title>
+        {themeData?.data?.configurations?.styleData?.siteTitle && (
+          <title>{themeData.data.configurations.styleData.siteTitle}</title>
         )}
       </Head>
-      <ThemeProvider>
-        <StorefrontPreview params={params} />
-      </ThemeProvider>
+      <StorefrontPreview params={params} />
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  params,
-  req,
-  resolvedUrl,
-}) => {
-  const host = "https://" + (req.headers.host ?? "");
-
-  const returns: any = {};
-  try {
-    const pageCall = await GetPage(host, "");
-    returns.page = pageCall;
-  } catch (error) {
-    console.log(error);
-  }
-  try {
-    const theme = await GetTheme(host);
-    returns.theme = theme;
-  } catch (error) {
-    console.log(error);
-  }
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req, resolvedUrl } = context;
+  const host = `https://${req.headers.host ?? ""}`;
   const url = resolvedUrl
-    ? "https://" + req.headers.host + resolvedUrl
-    : "https://" + req.headers.host;
-  return {
-    props: {
-      teste: "",
-      params: params?.page ?? null,
-      url: url,
-      ...returns,
-    },
-  };
+    ? `${host}${resolvedUrl}`
+    : host;
+
+  try {
+    return {
+      props: {
+        params: page ?? [],
+        url,
+        theme,
+      },
+    };
+  } catch (error) {
+    console.error("Erro ao carregar dados para a página:", error);
+
+    return {
+      props: {
+        params: [],
+        url,
+        themeData: null,
+      },
+    };
+  }
 };
 
-export default HomePage;
+export default HomePage; 
+ 
