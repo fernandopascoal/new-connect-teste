@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
-export const metadata = {
+
+const metadata = {
   title: "My App",
   description: "This is a server-side rendered layout for Next.js.",
 };
@@ -28,7 +29,6 @@ export default async function RootLayout({
 }
 
 async function fetchDataFromServer() {
-  // Exemplo de função simulando uma requisição SSR.
-  // Substitua com a lógica de carregamento de dados reais.
+
   return { serverTime: new Date().toISOString() };
 }
