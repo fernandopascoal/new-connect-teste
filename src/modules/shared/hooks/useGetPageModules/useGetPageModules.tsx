@@ -9,7 +9,7 @@ import { useRouterConnect } from '../../../shared/hooks/useRouterConnect/useRout
 /* import { getProductSlug } from '../../utils/getProductSlug'; */
 export const useGetPageModules = (disabled = false) => {
   const { status } = usePixwaySession();
-  const [href, setHref] = useState('');
+  const [href, setHref] = useState('https://foodbusters.stg.w3block.io/' + '?' + Date.now());
   const axios = useAxios(W3blockAPI.COMMERCE);
   const { query } = useRouterConnect();
   const [productSlug] = useState('');
@@ -22,7 +22,9 @@ export const useGetPageModules = (disabled = false) => {
     }
   }, []); */
 
-  useEffect(() => {
+
+
+useEffect(() => {
     if (window) {
       if (!productSlug) {
         setHref('https://foodbusters.stg.w3block.io/' + '?' + Date.now());
@@ -37,7 +39,9 @@ export const useGetPageModules = (disabled = false) => {
     () =>
       axios
         .get(PixwayAPIRoutes.GET_PAGE + `?url=${href}`)
-        .then((data) => data.data),
+        .then((data) => {
+          return data.data
+        }),
     {
       retry: 0,
       enabled:

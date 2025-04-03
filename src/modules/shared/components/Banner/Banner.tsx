@@ -203,7 +203,6 @@ const Slide = ({
     
   }") no-repeat center` */;
 
-  console.log(bg, 'bg')
 
 /*   const getButtonPadding = (fontSize: string) => {
     if (fontSize == '12px') {
