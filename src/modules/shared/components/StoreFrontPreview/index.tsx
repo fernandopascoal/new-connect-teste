@@ -11,7 +11,6 @@ import {
 
 import {
   DynamicApiModuleInterface,
-  MainModuleThemeInterface,
   ModulesType,
   TemplateData,
   Theme,
@@ -31,23 +30,7 @@ import {
 } from "../../hooks/useBreakpoints/useBreakpoints";
 import { DynamicApiProvider } from "../../providers/DynamicApiProvider";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
-import {
-  Footer,
-  Header,
-  Accordions,
-  Page404,
-  Products,
-  ProductPage,
-  Paragraph,
-  GridItemArea,
-  Midia,
-  GenericTableWrapper,
-  BannerWJJC,
-  PassBenefit,
-  getProductSlug,
-  useUserWallet,
-} from "@w3block/w3block-ui-sdk";
-import classNames from "classnames";
+
 import { StoreFrontMenu } from "../StoreFrontMenu";
 
 interface StorefrontPreviewProps {
@@ -68,12 +51,14 @@ export const StorefrontPreview = ({
   const { host } = useLocation();
   const { asPath, pushConnect } = useRouterConnect();
   const [currentPage, setCurrentPage] = useState<TemplateData | null | any>({});
-  const { setMainCoin } = useUserWallet();
+
   const [themeListener, setThemeListener] = useState<Theme | null>();
   const [currentHighlight, setCurrentHighlight] = useState("");
   const breakpoint = useBreakpoints();
   const mobileBreakpoints = [breakpointsEnum.SM, breakpointsEnum.XS];
-  const productSlug = getProductSlug(host + asPath);
+
+  console.log(host, "host");
+  console.log(params, 'params')
 
   const listener = ({
     data,
@@ -156,7 +141,7 @@ export const StorefrontPreview = ({
       mergedConfigStyleData?.mainCoin != ""
     ) {
       startTransition(() => {
-        setMainCoin?.(mergedConfigStyleData.mainCoin);
+        console.log("TESTE");
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -259,9 +244,7 @@ export const StorefrontPreview = ({
             fontFamily,
           }}
         >
-          {hasHeaderDefault && headerData ? (
-            <Header data={headerData as MainModuleThemeInterface} />
-          ) : null}
+          {hasHeaderDefault && headerData ? <div></div> : null}
           <Cookies
             data={
               theme.cookies ?? {
@@ -276,32 +259,13 @@ export const StorefrontPreview = ({
             }
           />
           {context?.isError && !children ? (
-            <Page404 />
+            <div></div>
           ) : (
             <>
-              {productSlug && (
-                <ProductPage
-                  hasCart={mergedConfigStyleData.hasCart}
-                  params={params}
-                  data={
-                    theme.productPage ?? {
-                      id: "",
-                      name: "productsPage",
-                      type: ModulesType.PRODUCT_PAGE,
-                      styleData: {},
-                      mobileStyleData: {},
-                    }
-                  }
-                />
-              )}
               {children ? (
                 children
               ) : (
-                <div
-                  className={classNames(
-                    `${!productSlug ? "pw-min-h-[calc(100vh-150px)]" : ""}`
-                  )}
-                >
+                <div>
                   {(data as TemplateData)?.modules?.map((item) => {
                     if (item.deviceType == "none") return null;
 
@@ -333,13 +297,9 @@ export const StorefrontPreview = ({
                       case ModulesType.BANNER:
                         return <Banner data={{ ...theme.banner, ...item }} />;
                       case ModulesType.CARDS:
-                        return (
-                          <Products data={{ ...theme.products, ...item }} />
-                        );
+                        return <div>Products</div>;
                       case ModulesType.ACCORDIONS:
-                        return (
-                          <Accordions data={{ ...theme.accordions, ...item }} />
-                        );
+                        return <div>Accordions</div>;
                       case ModulesType.IMAGE_PLUS_TEXT:
                         return (
                           <ImagePlusText
@@ -347,29 +307,17 @@ export const StorefrontPreview = ({
                           />
                         );
                       case ModulesType.PARAGRAPH:
-                        return (
-                          <Paragraph data={{ ...theme.paragraph, ...item }} />
-                        );
+                        return <div>Paragraph</div>;
                       case ModulesType.GRID_ITEM_AREA:
-                        return (
-                          <GridItemArea
-                            data={{ ...theme.GridItemArea, ...item }}
-                          />
-                        );
+                        return <div>GridItemArea</div>;
                       case ModulesType.PASS_BENEFIT:
-                        return (
-                          <PassBenefit
-                            data={{ ...theme.passBenefit, ...item }}
-                          />
-                        );
+                        return <div>PassBenefit</div>;
                       case ModulesType.MIDIA:
-                        return <Midia data={{ ...theme.midia, ...item }} />;
+                        return <div>Midia</div>;
                       case ModulesType.TABLE:
-                        return <GenericTableWrapper data={{ ...item }} />;
+                        return <div>GenericTableWrapper</div>;
                       case ModulesType.BANNER_WJJC:
-                        return (
-                          <BannerWJJC data={{ ...theme.bannerWjjc, ...item }} />
-                        );
+                        return <div>BannerWJJC</div>;
 
                       default:
                         break;
@@ -419,21 +367,7 @@ export const StorefrontPreview = ({
               })} */}
             </>
           )}
-          {hasFooterDefault && (
-            <Footer
-              data={
-                theme.footer ?? {
-                  id: "",
-                  name: "footer",
-                  type: ModulesType.FOOTER,
-                  styleData: {},
-                  contentData: {},
-                  mobileStyleData: {},
-                  mobileContentData: {},
-                }
-              }
-            />
-          )}
+          {hasFooterDefault && <div>Footer</div>}
         </div>
       </DynamicApiProvider>
     </Suspense>
