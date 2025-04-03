@@ -10,10 +10,13 @@ export const useGetTheme = (disabled = false) => {
   const [href, setHref] = useState('');
   const axios = useAxios(W3blockAPI.COMMERCE);
   const { query } = useRouterConnect();
+
   useEffect(() => {
     if (window) {
       //setHref(window.location.href);
       //setHref('https://hashdex.stg.w3block.io/' + '?' + Date.now());
+      setHref('https://foodbusters.stg.w3block.io/?' + Date.now());
+    } else {
       setHref('https://foodbusters.stg.w3block.io/?' + Date.now());
     }
   }, []);
