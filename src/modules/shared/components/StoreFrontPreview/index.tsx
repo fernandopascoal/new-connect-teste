@@ -31,7 +31,7 @@ import {
 import { DynamicApiProvider } from "../../providers/DynamicApiProvider";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
 
-import { StoreFrontMenu } from "../StoreFrontMenu";
+/* import { StoreFrontMenu } from "../StoreFrontMenu"; */
 
 interface StorefrontPreviewProps {
   params?: string[];
@@ -226,7 +226,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log("sem logicas e sem children");
+  console.log("sem menu");
 
   return (
     <Suspense
@@ -258,11 +258,7 @@ export const StorefrontPreview = ({
             }
           />
           <>
-              {children ? (
-                <>{children ? children : 'teste'}</>
-                
-              ) : (
-                <div>
+          <div>
                   {(data as TemplateData)?.modules?.map((item) => {
                    /*  if (item.deviceType == "none") return null; */
 
@@ -284,12 +280,12 @@ export const StorefrontPreview = ({
                       return null; */
 
                     switch (item.type) {
-                      case ModulesType.CATEGORIES:
+                      /* case ModulesType.CATEGORIES:
                         return (
                           <StoreFrontMenu
                             data={{ ...theme.categories, ...item }}
                           />
-                        );
+                        ); */
 
                       case ModulesType.BANNER:
                         return <Banner data={{ ...theme.banner, ...item }} />;
@@ -321,7 +317,12 @@ export const StorefrontPreview = ({
                     }
                   })}
                 </div>
-              )}
+           {/*    {children ? (
+                <>{children ? children : 'teste'}</>
+                
+              ) : (
+                
+              )} */}
               {/* {(data as TemplateData)?.modules?.map((item) => {
                 switch (item.type) {
                   case ModulesType.BANNER:
