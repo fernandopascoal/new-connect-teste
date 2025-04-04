@@ -226,7 +226,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log("sem logicas");
+  console.log("sem logicas e sem children");
 
   return (
     <Suspense
@@ -257,10 +257,7 @@ export const StorefrontPreview = ({
               }
             }
           />
-          {context?.isError && !children ? (
-            <div>TESTE</div>
-          ) : (
-            <>
+          <>
               {children ? (
                 <>{children ? children : 'teste'}</>
                 
@@ -366,7 +363,11 @@ export const StorefrontPreview = ({
                 }
               })} */}
             </>
-          )}
+          {/* {context?.isError && !children ? (
+            <div>TESTE</div>
+          ) : (
+            
+          )} */}
           {hasFooterDefault && <div>Footer</div>}
         </div>
       </DynamicApiProvider>
