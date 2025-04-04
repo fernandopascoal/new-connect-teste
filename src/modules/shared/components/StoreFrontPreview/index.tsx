@@ -267,7 +267,7 @@ export const StorefrontPreview = ({
               ) : (
                 <div>
                   {(data as TemplateData)?.modules?.map((item) => {
-                    if (item.deviceType == "none") return null;
+                   /*  if (item.deviceType == "none") return null; */
 
                    /*  if (
                       item.deviceType == "desktop" &&
@@ -279,12 +279,12 @@ export const StorefrontPreview = ({
                       !mobileBreakpoints.includes(breakpoint)
                     )
                       return null; */
-                    if (
+                  /*   if (
                       item.languageType &&
                       //locale !== item.languageType &&
                       item.languageType !== "all"
                     )
-                      return null;
+                      return null; */
 
                     switch (item.type) {
                       case ModulesType.CATEGORIES:
