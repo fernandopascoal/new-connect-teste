@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useMobilePreferenceDataWhenMobile } from "../../hooks/useMergeMobileData/useMergeMobileData";
 import TranslatableComponent from "../TranslatableComponent";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const Cookies = ({ data }: { data: CookiesData }) => {
   const [translate] = useTranslation();
@@ -34,15 +34,15 @@ export const Cookies = ({ data }: { data: CookiesData }) => {
 
   const { disclaimer } = mergedContentData;
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (window) {
       const acceptedCookies = Boolean(localStorage.getItem("acceptedCookies"));
       setAcceptedCookies(acceptedCookies);
     }
-  }, []);
+  }, []); */
 
   const handleAcceptCookies  = () => {
-    localStorage.setItem("acceptedCookies", "true");
+    //localStorage.setItem("acceptedCookies", "true");
     setAcceptedCookies(true)
   }
 
