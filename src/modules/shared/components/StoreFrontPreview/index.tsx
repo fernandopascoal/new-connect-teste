@@ -5,12 +5,10 @@ import {
   Suspense,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 
 import {
-  DynamicApiModuleInterface,
   ModulesType,
   TemplateData,
   Theme,
@@ -49,7 +47,7 @@ export const StorefrontPreview = ({
   const context = useContext(ThemeContext);
 /*   const locale = useLocale(); */
   const { host } = useLocation();
-  const { asPath, pushConnect } = useRouterConnect();
+  const {  pushConnect } = useRouterConnect();
   const [currentPage, setCurrentPage] = useState<TemplateData | null | any>({});
 
   const [themeListener, setThemeListener] = useState<Theme | null>();
@@ -149,9 +147,9 @@ export const StorefrontPreview = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context?.defaultTheme, themeListener]);
 
-  let data = { ...context?.pageTheme, ...currentPage };
+  const data = { ...context?.pageTheme, ...currentPage };
 
-  const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
+/*   const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
     if (context?.pageInfo && context.pageInfo.isRoutePatternRegex) {
       return {
         regexp: context.pageInfo.routePatternRegex,
@@ -171,7 +169,7 @@ export const StorefrontPreview = ({
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context?.pageInfo, data]);
+  }, [context?.pageInfo, data]); */
 
   const themeContext = context?.defaultTheme;
 
@@ -191,14 +189,14 @@ export const StorefrontPreview = ({
     ? `"${fontName}", ${fontName === "Aref Ruqaa" ? "serif" : "sans-serif"}`
     : "sans-serif";
 
-  const headerStyleData = theme.header?.styleData;
-  const headerMobileStyleData = theme.header?.mobileStyleData;
+/*   const headerStyleData = theme.header?.styleData;
+  const headerMobileStyleData = theme.header?.mobileStyleData; */
 
-  const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
+/*   const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
     ? { ...headerStyleData, ...headerMobileStyleData }
-    : headerStyleData;
+    : headerStyleData; */
 
-  const headerData = context?.defaultTheme?.header
+/*   const headerData = context?.defaultTheme?.header
     ? {
         ...theme.header,
         styleData: { ...mergedHeaderStyleData, fontFamily },
@@ -208,15 +206,15 @@ export const StorefrontPreview = ({
         name: "header",
         type: ModulesType.HEADER,
         styleData: {},
-      };
+      }; */
 
-  const hasHeaderDefault =
+/*   const hasHeaderDefault =
     mergedConfigStyleData?.hasHeader != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasHeader
-      : true;
+      : true; */
 
-  const hasFooterDefault =
+/*   const hasFooterDefault =
     mergedConfigStyleData?.hasFooter != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasFooter
@@ -224,9 +222,9 @@ export const StorefrontPreview = ({
   data = {
     ...data,
     dynamicApi,
-  };
+  }; */
 
-  console.log("sem menu e cookies");
+  console.log("sem header e footer");
 
   return (
     <Suspense
@@ -243,7 +241,7 @@ export const StorefrontPreview = ({
             fontFamily,
           }}
         >
-          {hasHeaderDefault && headerData ? <div></div> : null}
+          {/* {hasHeaderDefault && headerData ? <div></div> : null} */}
          {/*  <Cookies
             data={
               theme.cookies ?? {
@@ -369,7 +367,7 @@ export const StorefrontPreview = ({
           ) : (
             
           )} */}
-          {hasFooterDefault && <div>Footer</div>}
+        {/*   {hasFooterDefault && <div>Footer</div>} */}
         </div>
       </DynamicApiProvider>
     </Suspense>
