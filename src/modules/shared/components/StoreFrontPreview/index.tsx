@@ -226,7 +226,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log("Versão sem breakpoints e locale");
+  console.log("sem logicas");
 
   return (
     <Suspense
