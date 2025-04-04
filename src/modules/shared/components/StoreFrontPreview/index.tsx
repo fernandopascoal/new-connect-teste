@@ -5,22 +5,20 @@ import {
   Suspense,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 
 import {
-  DynamicApiModuleInterface,
   ModulesType,
   TemplateData,
   Theme,
 } from "../../interfaces";
 
 import { Banner } from "../Banner/Banner";
-import { Cookies } from "../Cookies";
+/* import { Cookies } from "../Cookies"; */
 import { ImagePlusText } from "../ImagePlusText/ImagePlusText";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { useLocale } from "../../hooks/useLocale";
+/* import { useLocale } from "../../hooks/useLocale"; */
 import { useEffectOnce, useLocation } from "react-use";
 import { useRouterConnect } from "../../hooks/useRouterConnect";
 import { PixwayAppRoutes } from "../../enums/PixwayAppRoutes";
@@ -31,7 +29,7 @@ import {
 import { DynamicApiProvider } from "../../providers/DynamicApiProvider";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
 
-import { StoreFrontMenu } from "../StoreFrontMenu";
+/* import { StoreFrontMenu } from "../StoreFrontMenu"; */
 
 interface StorefrontPreviewProps {
   params?: string[];
@@ -47,9 +45,9 @@ export const StorefrontPreview = ({
   params,
 }: StorefrontPreviewProps) => {
   const context = useContext(ThemeContext);
-  const locale = useLocale();
+/*   const locale = useLocale(); */
   const { host } = useLocation();
-  const { asPath, pushConnect } = useRouterConnect();
+  const {  pushConnect } = useRouterConnect();
   const [currentPage, setCurrentPage] = useState<TemplateData | null | any>({});
 
   const [themeListener, setThemeListener] = useState<Theme | null>();
@@ -59,6 +57,8 @@ export const StorefrontPreview = ({
 
   console.log(host, "host");
   console.log(params, "params");
+
+  console.log(children, 'children')
 
   const listener = ({
     data,
@@ -147,9 +147,9 @@ export const StorefrontPreview = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context?.defaultTheme, themeListener]);
 
-  let data = { ...context?.pageTheme, ...currentPage };
+  const data = { ...context?.pageTheme, ...currentPage };
 
-  const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
+/*   const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
     if (context?.pageInfo && context.pageInfo.isRoutePatternRegex) {
       return {
         regexp: context.pageInfo.routePatternRegex,
@@ -169,7 +169,7 @@ export const StorefrontPreview = ({
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context?.pageInfo, data]);
+  }, [context?.pageInfo, data]); */
 
   const themeContext = context?.defaultTheme;
 
@@ -189,14 +189,14 @@ export const StorefrontPreview = ({
     ? `"${fontName}", ${fontName === "Aref Ruqaa" ? "serif" : "sans-serif"}`
     : "sans-serif";
 
-  const headerStyleData = theme.header?.styleData;
-  const headerMobileStyleData = theme.header?.mobileStyleData;
+/*   const headerStyleData = theme.header?.styleData;
+  const headerMobileStyleData = theme.header?.mobileStyleData; */
 
-  const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
+/*   const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
     ? { ...headerStyleData, ...headerMobileStyleData }
-    : headerStyleData;
+    : headerStyleData; */
 
-  const headerData = context?.defaultTheme?.header
+/*   const headerData = context?.defaultTheme?.header
     ? {
         ...theme.header,
         styleData: { ...mergedHeaderStyleData, fontFamily },
@@ -206,15 +206,15 @@ export const StorefrontPreview = ({
         name: "header",
         type: ModulesType.HEADER,
         styleData: {},
-      };
+      }; */
 
-  const hasHeaderDefault =
+/*   const hasHeaderDefault =
     mergedConfigStyleData?.hasHeader != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasHeader
-      : true;
+      : true; */
 
-  const hasFooterDefault =
+/*   const hasFooterDefault =
     mergedConfigStyleData?.hasFooter != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasFooter
@@ -222,9 +222,9 @@ export const StorefrontPreview = ({
   data = {
     ...data,
     dynamicApi,
-  };
+  }; */
 
-  console.log("Versão sem localStora");
+  console.log("sem componentes extras");
 
   return (
     <Suspense
@@ -241,8 +241,8 @@ export const StorefrontPreview = ({
             fontFamily,
           }}
         >
-          {hasHeaderDefault && headerData ? <div></div> : null}
-          <Cookies
+          {/* {hasHeaderDefault && headerData ? <div></div> : null} */}
+         {/*  <Cookies
             data={
               theme.cookies ?? {
                 id: "",
@@ -254,19 +254,13 @@ export const StorefrontPreview = ({
                 mobileContentData: {},
               }
             }
-          />
-          {context?.isError && !children ? (
-            <div></div>
-          ) : (
-            <>
-              {children ? (
-                children
-              ) : (
-                <div>
+          /> */}
+          <>
+          <div>
                   {(data as TemplateData)?.modules?.map((item) => {
-                    if (item.deviceType == "none") return null;
+                   /*  if (item.deviceType == "none") return null; */
 
-                    if (
+                   /*  if (
                       item.deviceType == "desktop" &&
                       mobileBreakpoints.includes(breakpoint)
                     )
@@ -275,35 +269,35 @@ export const StorefrontPreview = ({
                       item.deviceType == "mobile" &&
                       !mobileBreakpoints.includes(breakpoint)
                     )
-                      return null;
-                    if (
+                      return null; */
+                  /*   if (
                       item.languageType &&
-                      locale !== item.languageType &&
+                      //locale !== item.languageType &&
                       item.languageType !== "all"
                     )
-                      return null;
+                      return null; */
 
                     switch (item.type) {
-                      case ModulesType.CATEGORIES:
+                      /* case ModulesType.CATEGORIES:
                         return (
                           <StoreFrontMenu
                             data={{ ...theme.categories, ...item }}
                           />
-                        );
+                        ); */
 
                       case ModulesType.BANNER:
                         return <Banner data={{ ...theme.banner, ...item }} />;
-                      case ModulesType.CARDS:
+                     /*  case ModulesType.CARDS:
                         return <div>Products</div>;
                       case ModulesType.ACCORDIONS:
-                        return <div>Accordions</div>;
+                        return <div>Accordions</div>; */
                       case ModulesType.IMAGE_PLUS_TEXT:
                         return (
                           <ImagePlusText
                             data={{ ...theme.imagePlusText, ...item }}
                           />
                         );
-                      case ModulesType.PARAGRAPH:
+                      /* case ModulesType.PARAGRAPH:
                         return <div>Paragraph</div>;
                       case ModulesType.GRID_ITEM_AREA:
                         return <div>GridItemArea</div>;
@@ -314,14 +308,19 @@ export const StorefrontPreview = ({
                       case ModulesType.TABLE:
                         return <div>GenericTableWrapper</div>;
                       case ModulesType.BANNER_WJJC:
-                        return <div>BannerWJJC</div>;
+                        return <div>BannerWJJC</div>; */
 
                       default:
                         break;
                     }
                   })}
                 </div>
-              )}
+           {/*    {children ? (
+                <>{children ? children : 'teste'}</>
+                
+              ) : (
+                
+              )} */}
               {/* {(data as TemplateData)?.modules?.map((item) => {
                 switch (item.type) {
                   case ModulesType.BANNER:
@@ -363,8 +362,12 @@ export const StorefrontPreview = ({
                 }
               })} */}
             </>
-          )}
-          {hasFooterDefault && <div>Footer</div>}
+          {/* {context?.isError && !children ? (
+            <div>TESTE</div>
+          ) : (
+            
+          )} */}
+        {/*   {hasFooterDefault && <div>Footer</div>} */}
         </div>
       </DynamicApiProvider>
     </Suspense>
