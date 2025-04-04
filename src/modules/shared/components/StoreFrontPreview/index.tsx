@@ -17,7 +17,7 @@ import {
 } from "../../interfaces";
 
 import { Banner } from "../Banner/Banner";
-import { Cookies } from "../Cookies";
+/* import { Cookies } from "../Cookies"; */
 import { ImagePlusText } from "../ImagePlusText/ImagePlusText";
 import { ThemeContext } from "../../contexts/ThemeContext";
 /* import { useLocale } from "../../hooks/useLocale"; */
@@ -226,7 +226,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log("sem menu");
+  console.log("sem menu e cookies");
 
   return (
     <Suspense
@@ -244,7 +244,7 @@ export const StorefrontPreview = ({
           }}
         >
           {hasHeaderDefault && headerData ? <div></div> : null}
-          <Cookies
+         {/*  <Cookies
             data={
               theme.cookies ?? {
                 id: "",
@@ -256,7 +256,7 @@ export const StorefrontPreview = ({
                 mobileContentData: {},
               }
             }
-          />
+          /> */}
           <>
           <div>
                   {(data as TemplateData)?.modules?.map((item) => {
