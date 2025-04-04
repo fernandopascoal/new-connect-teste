@@ -20,7 +20,7 @@ import { Banner } from "../Banner/Banner";
 import { Cookies } from "../Cookies";
 import { ImagePlusText } from "../ImagePlusText/ImagePlusText";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { useLocale } from "../../hooks/useLocale";
+/* import { useLocale } from "../../hooks/useLocale"; */
 import { useEffectOnce, useLocation } from "react-use";
 import { useRouterConnect } from "../../hooks/useRouterConnect";
 import { PixwayAppRoutes } from "../../enums/PixwayAppRoutes";
@@ -47,7 +47,7 @@ export const StorefrontPreview = ({
   params,
 }: StorefrontPreviewProps) => {
   const context = useContext(ThemeContext);
-  const locale = useLocale();
+/*   const locale = useLocale(); */
   const { host } = useLocation();
   const { asPath, pushConnect } = useRouterConnect();
   const [currentPage, setCurrentPage] = useState<TemplateData | null | any>({});
@@ -60,7 +60,7 @@ export const StorefrontPreview = ({
   console.log(host, "host");
   console.log(params, "params");
 
-  console.log(children, "children");
+  console.log(children, 'children')
 
   const listener = ({
     data,
@@ -226,7 +226,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log("versão sem isError");
+  console.log("Versão sem breakpoints e locale");
 
   return (
     <Suspense
@@ -257,76 +257,75 @@ export const StorefrontPreview = ({
               }
             }
           />
-          {/* {context?.isError && !children ? (
+          {context?.isError && !children ? (
             <div>TESTE</div>
           ) : (
-            
-          )} */}
-          <>
-            {children ? (
-              <>{children ? children : "teste"}</>
-            ) : (
-              <div>
-                {(data as TemplateData)?.modules?.map((item) => {
-                  if (item.deviceType == "none") return null;
+            <>
+              {children ? (
+                <>{children ? children : 'teste'}</>
+                
+              ) : (
+                <div>
+                  {(data as TemplateData)?.modules?.map((item) => {
+                    if (item.deviceType == "none") return null;
 
-                  if (
-                    item.deviceType == "desktop" &&
-                    mobileBreakpoints.includes(breakpoint)
-                  )
-                    return null;
-                  if (
-                    item.deviceType == "mobile" &&
-                    !mobileBreakpoints.includes(breakpoint)
-                  )
-                    return null;
-                  if (
-                    item.languageType &&
-                    locale !== item.languageType &&
-                    item.languageType !== "all"
-                  )
-                    return null;
+                   /*  if (
+                      item.deviceType == "desktop" &&
+                      mobileBreakpoints.includes(breakpoint)
+                    )
+                      return null;
+                    if (
+                      item.deviceType == "mobile" &&
+                      !mobileBreakpoints.includes(breakpoint)
+                    )
+                      return null; */
+                    if (
+                      item.languageType &&
+                      //locale !== item.languageType &&
+                      item.languageType !== "all"
+                    )
+                      return null;
 
-                  switch (item.type) {
-                    case ModulesType.CATEGORIES:
-                      return (
-                        <StoreFrontMenu
-                          data={{ ...theme.categories, ...item }}
-                        />
-                      );
+                    switch (item.type) {
+                      case ModulesType.CATEGORIES:
+                        return (
+                          <StoreFrontMenu
+                            data={{ ...theme.categories, ...item }}
+                          />
+                        );
 
-                    case ModulesType.BANNER:
-                      return <Banner data={{ ...theme.banner, ...item }} />;
-                    case ModulesType.CARDS:
-                      return <div>Products</div>;
-                    case ModulesType.ACCORDIONS:
-                      return <div>Accordions</div>;
-                    case ModulesType.IMAGE_PLUS_TEXT:
-                      return (
-                        <ImagePlusText
-                          data={{ ...theme.imagePlusText, ...item }}
-                        />
-                      );
-                    case ModulesType.PARAGRAPH:
-                      return <div>Paragraph</div>;
-                    case ModulesType.GRID_ITEM_AREA:
-                      return <div>GridItemArea</div>;
-                    case ModulesType.PASS_BENEFIT:
-                      return <div>PassBenefit</div>;
-                    case ModulesType.MIDIA:
-                      return <div>Midia</div>;
-                    case ModulesType.TABLE:
-                      return <div>GenericTableWrapper</div>;
-                    case ModulesType.BANNER_WJJC:
-                      return <div>BannerWJJC</div>;
+                      case ModulesType.BANNER:
+                        return <Banner data={{ ...theme.banner, ...item }} />;
+                      case ModulesType.CARDS:
+                        return <div>Products</div>;
+                      case ModulesType.ACCORDIONS:
+                        return <div>Accordions</div>;
+                      case ModulesType.IMAGE_PLUS_TEXT:
+                        return (
+                          <ImagePlusText
+                            data={{ ...theme.imagePlusText, ...item }}
+                          />
+                        );
+                      case ModulesType.PARAGRAPH:
+                        return <div>Paragraph</div>;
+                      case ModulesType.GRID_ITEM_AREA:
+                        return <div>GridItemArea</div>;
+                      case ModulesType.PASS_BENEFIT:
+                        return <div>PassBenefit</div>;
+                      case ModulesType.MIDIA:
+                        return <div>Midia</div>;
+                      case ModulesType.TABLE:
+                        return <div>GenericTableWrapper</div>;
+                      case ModulesType.BANNER_WJJC:
+                        return <div>BannerWJJC</div>;
 
-                    default:
-                      break;
-                  }
-                })}
-              </div>
-            )}
-            {/* {(data as TemplateData)?.modules?.map((item) => {
+                      default:
+                        break;
+                    }
+                  })}
+                </div>
+              )}
+              {/* {(data as TemplateData)?.modules?.map((item) => {
                 switch (item.type) {
                   case ModulesType.BANNER:
                     return <Banner data={{ ...theme.banner, ...item }} />;
@@ -366,7 +365,8 @@ export const StorefrontPreview = ({
                     break;
                 }
               })} */}
-          </>
+            </>
+          )}
           {hasFooterDefault && <div>Footer</div>}
         </div>
       </DynamicApiProvider>
