@@ -58,7 +58,7 @@ export const StorefrontPreview = ({
   const mobileBreakpoints = [breakpointsEnum.SM, breakpointsEnum.XS];
 
   console.log(host, "host");
-  console.log(params, 'params')
+  console.log(params, "params");
 
   const listener = ({
     data,
@@ -224,10 +224,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log(
-    (data as TemplateData)?.modules,
-    "(data as TemplateData)?.modules"
-  );
+  console.log("Versão sem localStora");
 
   return (
     <Suspense
