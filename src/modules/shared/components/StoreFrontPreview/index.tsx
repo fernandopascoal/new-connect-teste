@@ -60,6 +60,8 @@ export const StorefrontPreview = ({
   console.log(host, "host");
   console.log(params, "params");
 
+  console.log(children, 'children')
+
   const listener = ({
     data,
   }: MessageEvent<{
@@ -224,7 +226,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log("Versão sem localStora");
+  console.log("Versão default children");
 
   return (
     <Suspense
@@ -256,11 +258,12 @@ export const StorefrontPreview = ({
             }
           />
           {context?.isError && !children ? (
-            <div></div>
+            <div>TESTE</div>
           ) : (
             <>
               {children ? (
-                children
+                <>{children ? children : 'teste'}</>
+                
               ) : (
                 <div>
                   {(data as TemplateData)?.modules?.map((item) => {
