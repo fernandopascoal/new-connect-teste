@@ -224,7 +224,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   }; */
 
-  console.log("sem sdk");
+  console.log("sem componentes extras");
 
   return (
     <Suspense
@@ -287,17 +287,17 @@ export const StorefrontPreview = ({
 
                       case ModulesType.BANNER:
                         return <Banner data={{ ...theme.banner, ...item }} />;
-                      case ModulesType.CARDS:
+                     /*  case ModulesType.CARDS:
                         return <div>Products</div>;
                       case ModulesType.ACCORDIONS:
-                        return <div>Accordions</div>;
+                        return <div>Accordions</div>; */
                       case ModulesType.IMAGE_PLUS_TEXT:
                         return (
                           <ImagePlusText
                             data={{ ...theme.imagePlusText, ...item }}
                           />
                         );
-                      case ModulesType.PARAGRAPH:
+                      /* case ModulesType.PARAGRAPH:
                         return <div>Paragraph</div>;
                       case ModulesType.GRID_ITEM_AREA:
                         return <div>GridItemArea</div>;
@@ -308,7 +308,7 @@ export const StorefrontPreview = ({
                       case ModulesType.TABLE:
                         return <div>GenericTableWrapper</div>;
                       case ModulesType.BANNER_WJJC:
-                        return <div>BannerWJJC</div>;
+                        return <div>BannerWJJC</div>; */
 
                       default:
                         break;
