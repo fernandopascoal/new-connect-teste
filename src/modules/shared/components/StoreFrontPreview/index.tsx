@@ -226,7 +226,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log("Versão default children");
+  console.log("versão sem isError");
 
   return (
     <Suspense
