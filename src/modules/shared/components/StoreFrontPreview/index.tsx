@@ -224,7 +224,7 @@ export const StorefrontPreview = ({
     dynamicApi,
   }; */
 
-  console.log("sem header e footer");
+  console.log("sem sdk");
 
   return (
     <Suspense
