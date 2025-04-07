@@ -9,8 +9,8 @@ export enum breakpointsEnum {
 }
 
 export const useBreakpoints = (): breakpointsEnum => {
-  const isSm = useMedia('(min-width: 768px)', true);
-  const isLg = useMedia('(min-width: 1024px)', true);
+  const isSm = useMedia('(min-width: 768px)', false);
+  const isLg = useMedia('(min-width: 1024px)', false);
   const isXl = useMedia('(min-width: 1306px)', true);
   return useMemo(() => {
     if (isXl) {

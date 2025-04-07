@@ -3,15 +3,11 @@ import { useTranslation } from "react-i18next";
 import { useMobilePreferenceDataWhenMobile } from "../../hooks/useMergeMobileData/useMergeMobileData";
 import TranslatableComponent from "../TranslatableComponent";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
-import { useLocalStorage } from "usehooks-ts";
+import { useState } from "react";
 
 export const Cookies = ({ data }: { data: CookiesData }) => {
   const [translate] = useTranslation();
-  const [acceptedCookies, setAcceptedCookies] = useLocalStorage(
-    "acceptedCookies",
-    "false",
-    { initializeWithValue: false }
-  );
+  const [acceptedCookies, setAcceptedCookies] = useState(false);
 
   const { styleData, contentData, mobileStyleData, mobileContentData } = data;
 
@@ -38,10 +34,25 @@ export const Cookies = ({ data }: { data: CookiesData }) => {
 
   const { disclaimer } = mergedContentData;
 
+/*   useEffect(() => {
+    if (window) {
+      const acceptedCookies = Boolean(localStorage.getItem("acceptedCookies"));
+      setAcceptedCookies(acceptedCookies);
+    }
+  }, []); */
+
+  const handleAcceptCookies  = () => {
+    //localStorage.setItem("acceptedCookies", "true");
+    setAcceptedCookies(true)
+  }
+
+
+  console.log(acceptedCookies, "acceptedCookies");
+
   const sampleDisclaimer =
     "Nós utilizamos cookies e outras tecnologias semelhantes para coletar dados durante a navegação para melhorar a sua experiência em nossos serviços. Saiba mais em nossa";
 
-  if (acceptedCookies === "true") return null;
+  if (acceptedCookies === true) return null;
 
   return (
     <TranslatableComponent>
@@ -79,7 +90,7 @@ export const Cookies = ({ data }: { data: CookiesData }) => {
               color: buttonTextColor,
             }}
             className="pw-border-none pw-text-sm pw-h-[32px] pw-w-[109px] pw-px-4 pw-py-2 pw-rounded-lg pw-whitespace-nowrap pw-leading-4"
-            onClick={() => setAcceptedCookies("true")}
+            onClick={() => handleAcceptCookies()}
           >
             {translate("storefront>cookies>iAgree")}
           </button>

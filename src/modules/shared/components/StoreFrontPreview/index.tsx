@@ -164,6 +164,7 @@ export const StorefrontPreview = ({
 
   let data = { ...context?.pageTheme, ...currentPage };
 
+
   const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
     if (context?.pageInfo && context.pageInfo.isRoutePatternRegex) {
       return {
