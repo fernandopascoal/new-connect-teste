@@ -114,6 +114,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const returns: any = {};
   try {
     const pageCall = await GetPage(host, (token as any)?.accessToken);
+    console.log(pageCall, 'pageCall')
     returns.page = pageCall;
   } catch (error) {
     console.log(error);
@@ -127,6 +128,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const url = resolvedUrl
     ? "https://" + req.headers.host + resolvedUrl
     : "https://" + req.headers.host;
+
+    console.log(returns, 'returns')
 
   return {
     props: {
