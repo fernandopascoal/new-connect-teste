@@ -66,7 +66,11 @@ const HomePage: React.FC<HomePageProps> = ({ page, params, theme, url }) => {
       (metatags as any)[key] = item;
     }
   );
-  
+
+
+  console.log(theme, 'theme')
+  console.log(page, 'page')
+
   return (
     <>
       <Head>

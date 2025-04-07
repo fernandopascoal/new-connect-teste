@@ -49,8 +49,6 @@ export const ThemeProvider = ({
   
   console.log(pageName)
 
-  console.log(upperPage, 'upperPage')
-
 /*   useEffect(() => {
     if (upperTheme) {
       setDefaultTheme(upperTheme);
