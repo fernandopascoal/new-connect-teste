@@ -21,7 +21,7 @@ import { Banner } from "../Banner/Banner";
 import { Cookies } from "../Cookies";
 import { ImagePlusText } from "../ImagePlusText/ImagePlusText";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { useLocale } from "../../hooks/useLocale";
+/* import { useLocale } from "../../hooks/useLocale"; */
 import { useEffectOnce, useLocation } from "react-use";
 import { useRouterConnect } from "../../hooks/useRouterConnect";
 import { PixwayAppRoutes } from "../../enums/PixwayAppRoutes";
@@ -64,7 +64,7 @@ export const StorefrontPreview = ({
   params,
 }: StorefrontPreviewProps) => {
   const context = useContext(ThemeContext);
-  const locale = useLocale();
+/*   const locale = useLocale(); */
   const { host } = useLocation();
   const { asPath, pushConnect } = useRouterConnect();
   const [currentPage, setCurrentPage] = useState<TemplateData | null | any>({});
@@ -244,7 +244,7 @@ export const StorefrontPreview = ({
     "(data as TemplateData)?.modules"
   );
   
-  console.log("revert ssr commit")
+  console.log("remove item device logical")
 
   return (
     <Suspense
@@ -305,6 +305,7 @@ export const StorefrontPreview = ({
                   )}
                 >
                   {(data as TemplateData)?.modules?.map((item) => {
+                   /*  console.log(item.deviceType, 'itemDeviceType')
                     if (item.deviceType == "none") return null;
 
                     if (
@@ -322,7 +323,7 @@ export const StorefrontPreview = ({
                       locale !== item.languageType &&
                       item.languageType !== "all"
                     )
-                      return null;
+                      return null; */
 
                     switch (item.type) {
                       case ModulesType.CATEGORIES:
