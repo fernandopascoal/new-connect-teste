@@ -48,7 +48,7 @@ import {
   useUserWallet,
 } from "@w3block/w3block-ui-sdk";
 import classNames from "classnames";
-/* import { StoreFrontMenu } from "../StoreFrontMenu"; */
+import { StoreFrontMenu } from "../StoreFrontMenu";
 
 interface StorefrontPreviewProps {
   params?: string[];
@@ -239,8 +239,12 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
+  console.log(
+    (data as TemplateData)?.modules,
+    "(data as TemplateData)?.modules"
+  );
   
-  console.log("remove menu")
+  console.log("teste dentro da div")
 
   return (
     <Suspense
@@ -300,6 +304,9 @@ export const StorefrontPreview = ({
                     `${!productSlug ? "pw-min-h-[calc(100vh-150px)]" : ""}`
                   )}
                 >
+                  <div className="bg-red-200">
+                    <p>teste</p>
+                  </div>
                   {(data as TemplateData)?.modules?.map((item) => {
                    /*  console.log(item.deviceType, 'itemDeviceType')
                     if (item.deviceType == "none") return null;
@@ -322,12 +329,12 @@ export const StorefrontPreview = ({
                       return null; */
 
                     switch (item.type) {
-                      /* case ModulesType.CATEGORIES:
+                      case ModulesType.CATEGORIES:
                         return (
                           <StoreFrontMenu
                             data={{ ...theme.categories, ...item }}
                           />
-                        ); */
+                        );
 
                       case ModulesType.BANNER:
                         return <Banner data={{ ...theme.banner, ...item }} />;
