@@ -46,7 +46,9 @@ export const ThemeProvider = ({
   const [pageThemeSession, setPageThemeSession] =
     useSessionStorage<TemplateData | null>(BASE_THEME_KEY);
   const [pageName, setPageName] = useState('');
+  
   console.log(pageName)
+
 /*   useEffect(() => {
     if (upperTheme) {
       setDefaultTheme(upperTheme);
@@ -62,6 +64,7 @@ export const ThemeProvider = ({
       setPageInfo(upperPageInfo);
     }
   }, [upperPageInfo]); */
+
   const {
     data: theme,
     isError: isThemeError,
@@ -70,8 +73,6 @@ export const ThemeProvider = ({
   const { data: pageModules, isError } = useGetPageModules(
     upperPage ? true : false
   );
-
- 
 
   useEffect(() => {
     if (theme) {

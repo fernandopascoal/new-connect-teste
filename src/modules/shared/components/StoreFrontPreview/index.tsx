@@ -5,20 +5,23 @@ import {
   Suspense,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
 import {
+  DynamicApiModuleInterface,
+  MainModuleThemeInterface,
   ModulesType,
   TemplateData,
   Theme,
 } from "../../interfaces";
 
 import { Banner } from "../Banner/Banner";
-/* import { Cookies } from "../Cookies"; */
+import { Cookies } from "../Cookies";
 import { ImagePlusText } from "../ImagePlusText/ImagePlusText";
 import { ThemeContext } from "../../contexts/ThemeContext";
-/* import { useLocale } from "../../hooks/useLocale"; */
+import { useLocale } from "../../hooks/useLocale";
 import { useEffectOnce, useLocation } from "react-use";
 import { useRouterConnect } from "../../hooks/useRouterConnect";
 import { PixwayAppRoutes } from "../../enums/PixwayAppRoutes";
@@ -28,8 +31,24 @@ import {
 } from "../../hooks/useBreakpoints/useBreakpoints";
 import { DynamicApiProvider } from "../../providers/DynamicApiProvider";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
-
-/* import { StoreFrontMenu } from "../StoreFrontMenu"; */
+import {
+  Footer,
+  Header,
+  Accordions,
+  Page404,
+  Products,
+  ProductPage,
+  Paragraph,
+  GridItemArea,
+  Midia,
+  GenericTableWrapper,
+  BannerWJJC,
+  PassBenefit,
+  getProductSlug,
+  useUserWallet,
+} from "@w3block/w3block-ui-sdk";
+import classNames from "classnames";
+import { StoreFrontMenu } from "../StoreFrontMenu";
 
 interface StorefrontPreviewProps {
   params?: string[];
@@ -45,20 +64,16 @@ export const StorefrontPreview = ({
   params,
 }: StorefrontPreviewProps) => {
   const context = useContext(ThemeContext);
-/*   const locale = useLocale(); */
+  const locale = useLocale();
   const { host } = useLocation();
-  const {  pushConnect } = useRouterConnect();
+  const { asPath, pushConnect } = useRouterConnect();
   const [currentPage, setCurrentPage] = useState<TemplateData | null | any>({});
-
-  const [themeListener, setThemeListener] = useState<Theme | null>();
+  const { setMainCoin } = useUserWallet();
+  const [themeListener, setThemeListener] = useState<Theme | null | any>({});
   const [currentHighlight, setCurrentHighlight] = useState("");
   const breakpoint = useBreakpoints();
   const mobileBreakpoints = [breakpointsEnum.SM, breakpointsEnum.XS];
-
-  console.log(host, "host");
-  console.log(params, "params");
-
-  console.log(children, 'children')
+  const productSlug = getProductSlug(host + asPath);
 
   const listener = ({
     data,
@@ -141,15 +156,16 @@ export const StorefrontPreview = ({
       mergedConfigStyleData?.mainCoin != ""
     ) {
       startTransition(() => {
-        console.log("TESTE");
+        setMainCoin?.(mergedConfigStyleData.mainCoin);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context?.defaultTheme, themeListener]);
 
-  const data = { ...context?.pageTheme, ...currentPage };
+  let data = { ...context?.pageTheme, ...currentPage };
 
-/*   const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
+
+  const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
     if (context?.pageInfo && context.pageInfo.isRoutePatternRegex) {
       return {
         regexp: context.pageInfo.routePatternRegex,
@@ -169,7 +185,7 @@ export const StorefrontPreview = ({
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context?.pageInfo, data]); */
+  }, [context?.pageInfo, data]);
 
   const themeContext = context?.defaultTheme;
 
@@ -189,14 +205,14 @@ export const StorefrontPreview = ({
     ? `"${fontName}", ${fontName === "Aref Ruqaa" ? "serif" : "sans-serif"}`
     : "sans-serif";
 
-/*   const headerStyleData = theme.header?.styleData;
-  const headerMobileStyleData = theme.header?.mobileStyleData; */
+  const headerStyleData = theme.header?.styleData;
+  const headerMobileStyleData = theme.header?.mobileStyleData;
 
-/*   const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
+  const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
     ? { ...headerStyleData, ...headerMobileStyleData }
-    : headerStyleData; */
+    : headerStyleData;
 
-/*   const headerData = context?.defaultTheme?.header
+  const headerData = context?.defaultTheme?.header
     ? {
         ...theme.header,
         styleData: { ...mergedHeaderStyleData, fontFamily },
@@ -206,15 +222,15 @@ export const StorefrontPreview = ({
         name: "header",
         type: ModulesType.HEADER,
         styleData: {},
-      }; */
+      };
 
-/*   const hasHeaderDefault =
+  const hasHeaderDefault =
     mergedConfigStyleData?.hasHeader != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasHeader
-      : true; */
+      : true;
 
-/*   const hasFooterDefault =
+  const hasFooterDefault =
     mergedConfigStyleData?.hasFooter != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasFooter
@@ -222,9 +238,8 @@ export const StorefrontPreview = ({
   data = {
     ...data,
     dynamicApi,
-  }; */
+  };
 
-  console.log("sem componentes extras");
 
   return (
     <Suspense
@@ -241,8 +256,10 @@ export const StorefrontPreview = ({
             fontFamily,
           }}
         >
-          {/* {hasHeaderDefault && headerData ? <div></div> : null} */}
-         {/*  <Cookies
+          {hasHeaderDefault && headerData ? (
+            <Header data={headerData as MainModuleThemeInterface} />
+          ) : null}
+          <Cookies
             data={
               theme.cookies ?? {
                 id: "",
@@ -254,13 +271,38 @@ export const StorefrontPreview = ({
                 mobileContentData: {},
               }
             }
-          /> */}
-          <>
-          <div>
+          />
+          {context?.isError && !children ? (
+            <Page404 />
+          ) : (
+            <>
+              {productSlug && (
+                <ProductPage
+                  hasCart={mergedConfigStyleData.hasCart}
+                  params={params}
+                  data={
+                    theme.productPage ?? {
+                      id: "",
+                      name: "productsPage",
+                      type: ModulesType.PRODUCT_PAGE,
+                      styleData: {},
+                      mobileStyleData: {},
+                    }
+                  }
+                />
+              )}
+              {children ? (
+                children
+              ) : (
+                <div
+                  className={classNames(
+                    `${!productSlug ? "pw-min-h-[calc(100vh-150px)]" : ""}`
+                  )}
+                >
                   {(data as TemplateData)?.modules?.map((item) => {
-                   /*  if (item.deviceType == "none") return null; */
+                    if (item.deviceType == "none") return null;
 
-                   /*  if (
+                    if (
                       item.deviceType == "desktop" &&
                       mobileBreakpoints.includes(breakpoint)
                     )
@@ -269,58 +311,69 @@ export const StorefrontPreview = ({
                       item.deviceType == "mobile" &&
                       !mobileBreakpoints.includes(breakpoint)
                     )
-                      return null; */
-                  /*   if (
+                      return null;
+                    if (
                       item.languageType &&
-                      //locale !== item.languageType &&
+                      locale !== item.languageType &&
                       item.languageType !== "all"
                     )
-                      return null; */
+                      return null;
 
                     switch (item.type) {
-                      /* case ModulesType.CATEGORIES:
+                      case ModulesType.CATEGORIES:
                         return (
                           <StoreFrontMenu
                             data={{ ...theme.categories, ...item }}
                           />
-                        ); */
+                        );
 
                       case ModulesType.BANNER:
                         return <Banner data={{ ...theme.banner, ...item }} />;
-                     /*  case ModulesType.CARDS:
-                        return <div>Products</div>;
+                      case ModulesType.CARDS:
+                        return (
+                          <Products data={{ ...theme.products, ...item }} />
+                        );
                       case ModulesType.ACCORDIONS:
-                        return <div>Accordions</div>; */
+                        return (
+                          <Accordions data={{ ...theme.accordions, ...item }} />
+                        );
                       case ModulesType.IMAGE_PLUS_TEXT:
                         return (
                           <ImagePlusText
                             data={{ ...theme.imagePlusText, ...item }}
                           />
                         );
-                      /* case ModulesType.PARAGRAPH:
-                        return <div>Paragraph</div>;
+                      case ModulesType.PARAGRAPH:
+                        return (
+                          <Paragraph data={{ ...theme.paragraph, ...item }} />
+                        );
                       case ModulesType.GRID_ITEM_AREA:
-                        return <div>GridItemArea</div>;
+                        return (
+                          <GridItemArea
+                            data={{ ...theme.GridItemArea, ...item }}
+                          />
+                        );
                       case ModulesType.PASS_BENEFIT:
-                        return <div>PassBenefit</div>;
+                        return (
+                          <PassBenefit
+                            data={{ ...theme.passBenefit, ...item }}
+                          />
+                        );
                       case ModulesType.MIDIA:
-                        return <div>Midia</div>;
+                        return <Midia data={{ ...theme.midia, ...item }} />;
                       case ModulesType.TABLE:
-                        return <div>GenericTableWrapper</div>;
+                        return <GenericTableWrapper data={{ ...item }} />;
                       case ModulesType.BANNER_WJJC:
-                        return <div>BannerWJJC</div>; */
+                        return (
+                          <BannerWJJC data={{ ...theme.bannerWjjc, ...item }} />
+                        );
 
                       default:
                         break;
                     }
                   })}
                 </div>
-           {/*    {children ? (
-                <>{children ? children : 'teste'}</>
-                
-              ) : (
-                
-              )} */}
+              )}
               {/* {(data as TemplateData)?.modules?.map((item) => {
                 switch (item.type) {
                   case ModulesType.BANNER:
@@ -362,12 +415,22 @@ export const StorefrontPreview = ({
                 }
               })} */}
             </>
-          {/* {context?.isError && !children ? (
-            <div>TESTE</div>
-          ) : (
-            
-          )} */}
-        {/*   {hasFooterDefault && <div>Footer</div>} */}
+          )}
+          {hasFooterDefault && (
+            <Footer
+              data={
+                theme.footer ?? {
+                  id: "",
+                  name: "footer",
+                  type: ModulesType.FOOTER,
+                  styleData: {},
+                  contentData: {},
+                  mobileStyleData: {},
+                  mobileContentData: {},
+                }
+              }
+            />
+          )}
         </div>
       </DynamicApiProvider>
     </Suspense>

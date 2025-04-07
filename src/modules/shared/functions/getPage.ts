@@ -33,6 +33,7 @@ export async function GetPage(href: string, token = '') {
       headers,
     })
     .then((data) => {
+      console.log(data, 'data dentro do GetPage')
       return data.data;
     })
     .catch((e) => {
