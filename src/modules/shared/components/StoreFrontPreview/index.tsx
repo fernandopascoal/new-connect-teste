@@ -17,11 +17,11 @@ import {
   Theme,
 } from "../../interfaces";
 
-/* import { Banner } from "../Banner/Banner"; */
+import { Banner } from "../Banner/Banner";
 import { Cookies } from "../Cookies";
-/* import { ImagePlusText } from "../ImagePlusText/ImagePlusText"; */
+import { ImagePlusText } from "../ImagePlusText/ImagePlusText";
 import { ThemeContext } from "../../contexts/ThemeContext";
-/* import { useLocale } from "../../hooks/useLocale"; */
+import { useLocale } from "../../hooks/useLocale";
 import { useEffectOnce, useLocation } from "react-use";
 import { useRouterConnect } from "../../hooks/useRouterConnect";
 import { PixwayAppRoutes } from "../../enums/PixwayAppRoutes";
@@ -34,21 +34,21 @@ import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
 import {
   Footer,
   Header,
-/*   Accordions, */
+  Accordions,
   Page404,
-/*   Products, */
+  Products,
   ProductPage,
-/*   Paragraph,
+  Paragraph,
   GridItemArea,
   Midia,
   GenericTableWrapper,
   BannerWJJC,
-  PassBenefit, */
+  PassBenefit,
   getProductSlug,
   useUserWallet,
 } from "@w3block/w3block-ui-sdk";
 import classNames from "classnames";
-/* import { StoreFrontMenu } from "../StoreFrontMenu"; */
+import { StoreFrontMenu } from "../StoreFrontMenu";
 
 interface StorefrontPreviewProps {
   params?: string[];
@@ -64,12 +64,12 @@ export const StorefrontPreview = ({
   params,
 }: StorefrontPreviewProps) => {
   const context = useContext(ThemeContext);
-/*   const locale = useLocale(); */
+  const locale = useLocale();
   const { host } = useLocation();
   const { asPath, pushConnect } = useRouterConnect();
   const [currentPage, setCurrentPage] = useState<TemplateData | null | any>({});
   const { setMainCoin } = useUserWallet();
-  const [themeListener, setThemeListener] = useState<Theme | null>();
+  const [themeListener, setThemeListener] = useState<Theme | null | any>({});
   const [currentHighlight, setCurrentHighlight] = useState("");
   const breakpoint = useBreakpoints();
   const mobileBreakpoints = [breakpointsEnum.SM, breakpointsEnum.XS];
@@ -164,6 +164,8 @@ export const StorefrontPreview = ({
 
   let data = { ...context?.pageTheme, ...currentPage };
 
+  console.log(data, 'DATA')
+
   const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
     if (context?.pageInfo && context.pageInfo.isRoutePatternRegex) {
       return {
@@ -239,12 +241,6 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log(
-    (data as TemplateData)?.modules,
-    "(data as TemplateData)?.modules"
-  );
-  
-  console.log("teste dentro da div")
 
   return (
     <Suspense
@@ -304,11 +300,7 @@ export const StorefrontPreview = ({
                     `${!productSlug ? "pw-min-h-[calc(100vh-150px)]" : ""}`
                   )}
                 >
-                  <div className="bg-red-200">
-                    <p>teste</p>
-                  </div>
-                  {(data as TemplateData)?.modules?.map((item, idx) => {
-                   /*  console.log(item.deviceType, 'itemDeviceType')
+                  {(data as TemplateData)?.modules?.map((item) => {
                     if (item.deviceType == "none") return null;
 
                     if (
@@ -326,14 +318,9 @@ export const StorefrontPreview = ({
                       locale !== item.languageType &&
                       item.languageType !== "all"
                     )
-                      return null; */
-                      
+                      return null;
 
-                      return (
-                        <div key={idx}><p>TESTE DENTRO DO MAP</p></div>
-                      )
-
-                    /* switch (item.type) {
+                    switch (item.type) {
                       case ModulesType.CATEGORIES:
                         return (
                           <StoreFrontMenu
@@ -384,7 +371,7 @@ export const StorefrontPreview = ({
 
                       default:
                         break;
-                    } */
+                    }
                   })}
                 </div>
               )}
