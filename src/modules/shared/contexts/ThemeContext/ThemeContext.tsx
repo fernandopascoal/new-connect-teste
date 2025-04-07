@@ -49,7 +49,7 @@ export const ThemeProvider = ({
   
   console.log(pageName)
 
-  console.log(pageTheme, 'pageTheme')
+  console.log(upperPage, 'upperPage')
 
 /*   useEffect(() => {
     if (upperTheme) {
