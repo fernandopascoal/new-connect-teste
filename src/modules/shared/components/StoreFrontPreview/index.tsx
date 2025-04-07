@@ -162,9 +162,11 @@ export const StorefrontPreview = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context?.defaultTheme, themeListener]);
 
-  let data = { ...context?.pageTheme, ...currentPage };
+  let data = { ...context?.pageTheme };
 
   console.log(data, 'DATA')
+
+  console.log(currentPage, 'currentPage')
 
   const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
     if (context?.pageInfo && context.pageInfo.isRoutePatternRegex) {
