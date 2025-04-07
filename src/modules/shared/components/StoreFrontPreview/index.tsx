@@ -17,9 +17,9 @@ import {
   Theme,
 } from "../../interfaces";
 
-import { Banner } from "../Banner/Banner";
+/* import { Banner } from "../Banner/Banner"; */
 import { Cookies } from "../Cookies";
-import { ImagePlusText } from "../ImagePlusText/ImagePlusText";
+/* import { ImagePlusText } from "../ImagePlusText/ImagePlusText"; */
 import { ThemeContext } from "../../contexts/ThemeContext";
 /* import { useLocale } from "../../hooks/useLocale"; */
 import { useEffectOnce, useLocation } from "react-use";
@@ -34,21 +34,21 @@ import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
 import {
   Footer,
   Header,
-  Accordions,
+/*   Accordions, */
   Page404,
-  Products,
+/*   Products, */
   ProductPage,
-  Paragraph,
+/*   Paragraph,
   GridItemArea,
   Midia,
   GenericTableWrapper,
   BannerWJJC,
-  PassBenefit,
+  PassBenefit, */
   getProductSlug,
   useUserWallet,
 } from "@w3block/w3block-ui-sdk";
 import classNames from "classnames";
-import { StoreFrontMenu } from "../StoreFrontMenu";
+/* import { StoreFrontMenu } from "../StoreFrontMenu"; */
 
 interface StorefrontPreviewProps {
   params?: string[];
@@ -307,7 +307,7 @@ export const StorefrontPreview = ({
                   <div className="bg-red-200">
                     <p>teste</p>
                   </div>
-                  {(data as TemplateData)?.modules?.map((item) => {
+                  {(data as TemplateData)?.modules?.map((item, idx) => {
                    /*  console.log(item.deviceType, 'itemDeviceType')
                     if (item.deviceType == "none") return null;
 
@@ -327,8 +327,13 @@ export const StorefrontPreview = ({
                       item.languageType !== "all"
                     )
                       return null; */
+                      
 
-                    switch (item.type) {
+                      return (
+                        <div key={idx}><p>TESTE DENTRO DO MAP</p></div>
+                      )
+
+                    /* switch (item.type) {
                       case ModulesType.CATEGORIES:
                         return (
                           <StoreFrontMenu
@@ -379,7 +384,7 @@ export const StorefrontPreview = ({
 
                       default:
                         break;
-                    }
+                    } */
                   })}
                 </div>
               )}
