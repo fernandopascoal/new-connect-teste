@@ -162,9 +162,9 @@ export const StorefrontPreview = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context?.defaultTheme, themeListener]);
 
-  let data = { ...context?.pageTheme };
+  let data = { ...context?.pageTheme, ...currentPage };
 
-  console.log(data, 'DATA')
+  console.log(context?.pageTheme, 'DATA')
 
   console.log(currentPage, 'currentPage')
 

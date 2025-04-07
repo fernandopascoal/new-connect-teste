@@ -8,7 +8,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useSessionStorage } from 'react-use';
+/* import { useSessionStorage } from 'react-use'; */
 
 import { useGetPageModules } from '../../hooks/useGetPageModules/useGetPageModules';
 import { useGetTheme } from '../../hooks/useGetTheme';
@@ -27,7 +27,7 @@ export interface IThemeContext {
   pageInfo?: GetPageInfoInterface;
 }
 
-const BASE_THEME_KEY = 'baseThem_key';
+/* const BASE_THEME_KEY = 'baseThem_key'; */
 
 export const ThemeProvider = ({
   children,
@@ -43,10 +43,10 @@ export const ThemeProvider = ({
   const [defaultTheme, setDefaultTheme] = useState<Theme | null | any>(upperTheme ? upperTheme : {});
   const [pageInfo, setPageInfo] = useState<GetPageInfoInterface | undefined | any>(upperPageInfo ? upperPageInfo : {});
   const [pageTheme, setPageTheme] = useState<TemplateData | null | any>(upperPage ? upperPage : {});
-  const [pageThemeSession, setPageThemeSession] =
-    useSessionStorage<TemplateData | null>(BASE_THEME_KEY);
   const [pageName, setPageName] = useState('');
+
   console.log(pageName)
+
 /*   useEffect(() => {
     if (upperTheme) {
       setDefaultTheme(upperTheme);
@@ -62,6 +62,7 @@ export const ThemeProvider = ({
       setPageInfo(upperPageInfo);
     }
   }, [upperPageInfo]); */
+
   const {
     data: theme,
     isError: isThemeError,
@@ -71,15 +72,11 @@ export const ThemeProvider = ({
     upperPage ? true : false
   );
 
- 
-
   useEffect(() => {
     if (theme) {
       setDefaultTheme(theme.data);
-      setPageThemeSession(theme.data);
-    } else if (isThemeError) {
-      setPageTheme(pageThemeSession);
-    }
+ 
+    } 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, isThemeError]);
 
