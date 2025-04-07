@@ -243,6 +243,8 @@ export const StorefrontPreview = ({
     (data as TemplateData)?.modules,
     "(data as TemplateData)?.modules"
   );
+  
+  console.log("revert ssr commit")
 
   return (
     <Suspense
