@@ -48,7 +48,7 @@ import {
   useUserWallet,
 } from "@w3block/w3block-ui-sdk";
 import classNames from "classnames";
-import { StoreFrontMenu } from "../StoreFrontMenu";
+/* import { StoreFrontMenu } from "../StoreFrontMenu"; */
 
 interface StorefrontPreviewProps {
   params?: string[];
@@ -239,12 +239,8 @@ export const StorefrontPreview = ({
     dynamicApi,
   };
 
-  console.log(
-    (data as TemplateData)?.modules,
-    "(data as TemplateData)?.modules"
-  );
   
-  console.log("remove item device logical")
+  console.log("remove menu")
 
   return (
     <Suspense
@@ -326,12 +322,12 @@ export const StorefrontPreview = ({
                       return null; */
 
                     switch (item.type) {
-                      case ModulesType.CATEGORIES:
+                      /* case ModulesType.CATEGORIES:
                         return (
                           <StoreFrontMenu
                             data={{ ...theme.categories, ...item }}
                           />
-                        );
+                        ); */
 
                       case ModulesType.BANNER:
                         return <Banner data={{ ...theme.banner, ...item }} />;
