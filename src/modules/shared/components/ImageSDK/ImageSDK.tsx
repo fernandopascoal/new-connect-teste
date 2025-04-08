@@ -38,6 +38,8 @@ export const ImageSDK = ({
   const isVid = isVideo(src ?? "");
   const [isError, setError] = useState(false);
 
+  console.log('imagem otimizada')
+
 
   const VideoThreath = () => {
     return (
@@ -52,6 +54,10 @@ export const ImageSDK = ({
           ref={preImageRef}
           width={600}
           height={300}
+          priority={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px"
+          placeholder="blur"
+          blurDataURL={src}
           
         />
 
@@ -95,6 +101,10 @@ export const ImageSDK = ({
           width={600}
           height={300}
           onError={() => setError(true)}
+          priority={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px"
+          placeholder="blur"
+          blurDataURL={src}
         />
         <Image
           src={
@@ -118,6 +128,10 @@ export const ImageSDK = ({
             }
           }}
           style={{ display: "none" }}
+          priority={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px"
+          placeholder="blur"
+          blurDataURL={src}
         />
       </>
     );
@@ -157,6 +171,10 @@ export const ImageSDK = ({
           src={isError ? imagePlaceholder : src ?? ""}
           width={600}
           height={300}
+          priority={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px"
+          placeholder="blur"
+          blurDataURL={src}
         />
       );
     }
