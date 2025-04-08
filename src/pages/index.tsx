@@ -121,6 +121,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
   try {
     const theme = await GetTheme(host);
+    console.log(theme, 'GetTheme')
     returns.theme = theme;
   } catch (error) {
     console.log(error);
