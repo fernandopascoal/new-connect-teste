@@ -4,7 +4,7 @@ import React from "react";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 
-import { getToken } from "next-auth/jwt";
+/* import { getToken } from "next-auth/jwt"; */
 
 
 import { loadFonts } from "../modules/core/utils/loadFonts";
@@ -105,22 +105,22 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   resolvedUrl,
 }) => {
-  const token = await getToken({
+/*   const token = await getToken({
     req,
     secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET ?? "",
   });
-  const host = "https://" + req.headers.host;
+  const host = "https://" + req.headers.host; */
 
   const returns: any = {};
   try {
-    const pageCall = await GetPage(host, (token as any)?.accessToken);
+    const pageCall = await GetPage();
     console.log(pageCall, 'pageCall')
     returns.page = pageCall;
   } catch (error) {
     console.log(error);
   }
   try {
-    const theme = await GetTheme(host);
+    const theme = await GetTheme();
     console.log(theme, 'GetTheme')
     returns.theme = theme;
   } catch (error) {
