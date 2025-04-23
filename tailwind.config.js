@@ -2,7 +2,8 @@ import colors from 'tailwindcss/colors';
 
 export const content = [
     "./src/modules/**/*.{js,ts,tsx,jsx}",
-    "./src/pages/**/*.{js,ts,jsx,tsx}"
+    "./src/pages/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/w3block-new-lib/**/*.{js,ts,jsx,tsx}",
 ];
 export const theme = {
     screens: {
@@ -45,5 +46,4 @@ export const theme = {
         },
     }
 };
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-export const plugins = [require('@mertasan/tailwindcss-variables')];
+
