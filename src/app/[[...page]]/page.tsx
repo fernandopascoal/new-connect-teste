@@ -3,7 +3,7 @@
 
 import React from "react";
 import Head from "next/head";
-import { headers } from "next/headers";
+/* import { headers } from "next/headers"; */
 /* import { getToken } from "next-auth/jwt"; */
 
 import { loadFonts } from "../../components/core/utils/loadFonts";
@@ -28,11 +28,11 @@ const fetchTheme = async (href: string) => {
 
 export default async function Page({ params }: { params: { page: [] } }) {
   const pathname = '/' + (params.page?.join('/') ?? '');
-  const headersList = headers();
-  const host = (await headersList).get("host");
+/*   const headersList = headers();
+  const host = (await headersList).get("host"); */
 
-  const page = await fetchPage(host + pathname);
-  const theme = await fetchTheme(host + pathname);
+  const page = await fetchPage("foodbusters.stg.w3block.io" + pathname);
+  const theme = await fetchTheme("foodbusters.stg.w3block.io" + pathname);
 
   if (theme?.data?.configurations?.contentData?.customFonts)
     loadFonts(theme?.data?.configurations?.contentData?.customFonts);
