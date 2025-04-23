@@ -26,8 +26,8 @@ const fetchTheme = async (href: string) => {
   return theme;
 };
 
-export default async function Page({ params }: { params: { page: [] } }) {
-  const pathname = '/' + (params.page?.join('/') ?? '');
+export default async function Page({ params }: any) {
+  const pathname = '/' + (params?.page?.join('/') ?? '');
 /*   const headersList = headers();
   const host = (await headersList).get("host"); */
 
