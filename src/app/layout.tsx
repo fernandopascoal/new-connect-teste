@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import "w3block-new-lib/dist/style.css";
+import "../../styles/globals.css"
 import { PageProvider } from "../components/core/components/PageProvider";
 
 const metadata = {

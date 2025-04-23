@@ -3650,10 +3650,10 @@ react-dom@^18.3.1:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
-react-i18next@^15.4.1:
-  version "15.4.1"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-15.4.1.tgz#33f3e89c2f6c68e2bfcbf9aa59986ad42fe78758"
-  integrity sha512-ahGab+IaSgZmNPYXdV1n+OYky95TGpFwnKRflX/16dY04DsYYKHtVLjeny7sBSCREEcoMbAgSkFiGLF5g5Oofw==
+react-i18next@^15.4.1, react-i18next@^15.5.1:
+  version "15.5.1"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-15.5.1.tgz#ceada755a0b6691432b6b6dc5dad454fd3d158e3"
+  integrity sha512-C8RZ7N7H0L+flitiX6ASjq9p5puVJU1Z8VyL3OgM/QOMRf40BMZX+5TkpxzZVcTmOLPX5zlti4InEX5pFyiVeA==
   dependencies:
     "@babel/runtime" "^7.25.0"
     html-parse-stringify "^3.0.1"
@@ -4605,12 +4605,17 @@ void-elements@3.1.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==
 
-w3block-new-lib@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/w3block-new-lib/-/w3block-new-lib-1.0.9.tgz#65125c0a8c863e4d3b5f7077712e81e338fd84db"
-  integrity sha512-sX1PrIx+usUaxTRQecvrlEe1Xikvpp5JKDDTr/P+MBvYzaliy1jYnHSXl9ayHezMWqJd/147s+4JczgsvrwV8w==
+w3block-new-lib@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/w3block-new-lib/-/w3block-new-lib-1.0.10.tgz#1789690519218ff07b1d6299260901816d4299e4"
+  integrity sha512-3GpGeuQapPcr6wym8Wc+aCJ+iS5r5yEk/vr/CWfO8fzJR4xexZ6Fq4ZszZxXDREYvxYugNym9NDzam0OgZxcNA==
   dependencies:
+    classnames "^2.5.1"
+    lodash "^4.17.21"
+    react-i18next "^15.5.1"
+    react-use "^17.6.0"
     rimraf "^5.0.10"
+    swiper "^11.2.6"
 
 which-boxed-primitive@^1.1.0, which-boxed-primitive@^1.1.1:
   version "1.1.1"

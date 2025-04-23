@@ -1,29 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
 import {
   ReactNode,
   startTransition,
   Suspense,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 
-import {
-  DynamicApiModuleInterface,
-  MainModuleThemeInterface,
-  ModulesType,
-  TemplateData,
-  Theme,
-} from "../../interfaces";
+import { ModulesType, TemplateData, Theme } from "../../interfaces";
 
-import { Banner } from "../Banner/Banner";
-import { Cookies } from "../Cookies";
-import { ImagePlusText } from "../ImagePlusText/ImagePlusText";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { useLocale } from "../../hooks/useLocale";
-import { useEffectOnce, useLocation } from "react-use";
+import { useEffectOnce } from "react-use";
 import { useRouterConnect } from "../../hooks/useRouterConnect";
 import { PixwayAppRoutes } from "../../enums/PixwayAppRoutes";
 import {
@@ -33,9 +22,8 @@ import {
 import { DynamicApiProvider } from "../../providers/DynamicApiProvider";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
 
-import classNames from "classnames";
-import { StoreFrontMenu } from "../StoreFrontMenu";
-import { Hello } from "w3block-new-lib";
+import { Paragraph } from "w3block-new-lib";
+import { ParagraphData } from "w3block-new-lib/dist/interfaces/Theme";
 
 interface StorefrontPreviewProps {
   params?: string[];
@@ -46,21 +34,15 @@ interface StorefrontPreviewProps {
   upperPage?: TemplateData | null;
 }
 
-export const StorefrontPreview = ({
-  children,
-  params,
-}: StorefrontPreviewProps) => {
+export const StorefrontPreview = ({ children }: StorefrontPreviewProps) => {
   const context = useContext(ThemeContext);
-  const locale = useLocale();
-  const { host } = useLocation();
-  const { asPath, pushConnect } = useRouterConnect();
+  const { pushConnect } = useRouterConnect();
   const [currentPage, setCurrentPage] = useState<TemplateData | null | any>({});
   const [themeListener, setThemeListener] = useState<Theme | null | any>({});
   const [currentHighlight, setCurrentHighlight] = useState("");
   const breakpoint = useBreakpoints();
   const mobileBreakpoints = [breakpointsEnum.SM, breakpointsEnum.XS];
-  const [mainCoin, setMainCoin] = useState()
-
+  const [setMainCoin] = useState<any>();
 
   const listener = ({
     data,
@@ -149,10 +131,9 @@ export const StorefrontPreview = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context?.defaultTheme, themeListener]);
 
-  let data = { ...context?.pageTheme, ...currentPage };
+  const data = { ...context?.pageTheme, ...currentPage };
 
-
-  const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
+  /*   const dynamicApi = useMemo<DynamicApiModuleInterface | undefined>(() => {
     if (context?.pageInfo && context.pageInfo.isRoutePatternRegex) {
       return {
         regexp: context.pageInfo.routePatternRegex,
@@ -172,7 +153,7 @@ export const StorefrontPreview = ({
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context?.pageInfo, data]);
+  }, [context?.pageInfo, data]); */
 
   const themeContext = context?.defaultTheme;
 
@@ -192,14 +173,14 @@ export const StorefrontPreview = ({
     ? `"${fontName}", ${fontName === "Aref Ruqaa" ? "serif" : "sans-serif"}`
     : "sans-serif";
 
-  const headerStyleData = theme.header?.styleData;
-  const headerMobileStyleData = theme.header?.mobileStyleData;
+  /*   const headerStyleData = theme.header?.styleData;
+  const headerMobileStyleData = theme.header?.mobileStyleData; */
 
-  const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
+  /*   const mergedHeaderStyleData = mobileBreakpoints.includes(breakpoint)
     ? { ...headerStyleData, ...headerMobileStyleData }
     : headerStyleData;
-
-  const headerData = context?.defaultTheme?.header
+ */
+  /*   const headerData = context?.defaultTheme?.header
     ? {
         ...theme.header,
         styleData: { ...mergedHeaderStyleData, fontFamily },
@@ -209,15 +190,15 @@ export const StorefrontPreview = ({
         name: "header",
         type: ModulesType.HEADER,
         styleData: {},
-      };
+      }; */
 
-  const hasHeaderDefault =
+  /*   const hasHeaderDefault =
     mergedConfigStyleData?.hasHeader != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasHeader
       : true;
-
-  const hasFooterDefault =
+ */
+  /*   const hasFooterDefault =
     mergedConfigStyleData?.hasFooter != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasFooter
@@ -225,8 +206,9 @@ export const StorefrontPreview = ({
   data = {
     ...data,
     dynamicApi,
-  };
+  }; */
 
+  console.log(context.pageInfo, "data");
 
   return (
     <Suspense
@@ -243,10 +225,15 @@ export const StorefrontPreview = ({
             fontFamily,
           }}
         >
-          <Hello />
+          <p style={{margin: 40, fontSize: 32}} className="mb-10">{context?.pageInfo?.name}</p>
+          {data.modules.map((item: ParagraphData) => {
+            switch (item.type) {
+              case ModulesType.PARAGRAPH:
+                return <Paragraph key={item.id} data={item} />;
+            }
+          })}
         </div>
       </DynamicApiProvider>
     </Suspense>
   );
 };
-

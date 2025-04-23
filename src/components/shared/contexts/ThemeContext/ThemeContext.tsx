@@ -47,9 +47,8 @@ export const ThemeProvider = ({
   const [pageTheme, setPageTheme] = useState<TemplateData | null | any>(upperPage ? upperPage : {});
   const [pageThemeSession, setPageThemeSession] =
     useSessionStorage<TemplateData | null>(BASE_THEME_KEY);
-  const [pageName, setPageName] = useState('');
-  
-  console.log(pageName)
+  const [,setPageName] = useState('');
+
 
 /*   useEffect(() => {
     if (upperTheme) {

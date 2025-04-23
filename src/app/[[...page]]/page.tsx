@@ -1,42 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 "use server";
 
 import React from "react";
 import Head from "next/head";
-import * as router from './api/route'
-
+import { headers } from "next/headers";
 /* import { getToken } from "next-auth/jwt"; */
 
-import { loadFonts } from "../components/core/utils/loadFonts";
-import { GetTheme } from "../components/shared/functions/getTheme";
-import { GetPage } from "../components/shared/functions/getPage";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { ThemeProvider } from "../components/shared/contexts/ThemeContext";
-import { StorefrontPreview } from "../components/shared/components/StoreFrontPreview";
+import { loadFonts } from "../../components/core/utils/loadFonts";
+import { GetTheme } from "../../components/shared/functions/getTheme";
+import { GetPage } from "../../components/shared/functions/getPage";
+import { ThemeProvider } from "../../components/shared/contexts/ThemeContext";
+import { StorefrontPreview } from "../../components/shared/components/StoreFrontPreview";
 
-type Params = Promise<{ slug: string }>;
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+const fetchPage = async (href: string) => {
+  const transformHost = href.includes("http") ? href : `https://${href}`;
+  const page = await GetPage(transformHost);
 
-interface HomePageProps {
-  params: string[];
-  url: string;
-  theme: any;
-  page: any; // Ajuste para tipagem adequada se necessário
-}
+  return page;
+};
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ buildId: string }>;
-}) {
+const fetchTheme = async (href: string) => {
+  const transformHost = href.includes("http") ? href : `https://${href}`;
+  const theme = await GetTheme(transformHost);
 
-  const resolvedParams = await params
+  return theme;
+};
 
-  console.log(resolvedParams, 'params')
+export default async function Page({ params }: { params: { page: [] } }) {
+  const pathname = '/' + (params.page?.join('/') ?? '');
+  const headersList = headers();
+  const host = (await headersList).get("host");
 
+  const page = await fetchPage(host + pathname);
+  const theme = await fetchTheme(host + pathname);
 
-  /*  if (theme?.data?.configurations?.contentData?.customFonts)
+  if (theme?.data?.configurations?.contentData?.customFonts)
     loadFonts(theme?.data?.configurations?.contentData?.customFonts);
 
   const metatags = {
@@ -61,7 +59,7 @@ export default async function Page({
     },
     "property-og:url": {
       property: "og:url",
-      content: url,
+      content: page?.routePattern,
     },
     "name-twitter:card": {
       name: "twitter:card",
@@ -80,13 +78,11 @@ export default async function Page({
       (metatags as any)[key] = item;
     }
   );
- */
 
   return (
     <>
       <Head>
-        <></>
-        {/* {theme?.data?.configurations?.styleData?.favicon && (
+        {theme?.data?.configurations?.styleData?.favicon && (
           <link
             rel="icon"
             type="image/x-icon"
@@ -99,9 +95,9 @@ export default async function Page({
           <title>
             {theme?.themeData.data.configurations.styleData.siteTitle}
           </title>
-        )} */}
+        )}
       </Head>
-      <ThemeProvider>
+      <ThemeProvider upperPageInfo={page as any} upperPage={page?.data} upperTheme={theme?.data}>
         <StorefrontPreview />
       </ThemeProvider>
     </>

@@ -46,9 +46,7 @@ import { useGetPageModules } from '../hooks/useGetPageModules';
     const [pageTheme, setPageTheme] = useState<TemplateData | null>(null);
     const [pageThemeSession, setPageThemeSession] =
       useSessionStorage<TemplateData | null>(BASE_THEME_KEY);
-    const [pageName, setPageName] = useState('');
-
-    console.log(pageName)
+    const [,setPageName] = useState('');
     
     useEffect(() => {
       if (upperTheme) {
