@@ -8,7 +8,6 @@ import {
   PixwaySDKNextRouterAdapter,
   UiSDKUtmProvider,
   W3blockUISDKGeneralConfigProvider,
-  OnboardProvider,
 } from "w3block-new-lib";
 import LogRocket from "logrocket";
 import { useSession } from "next-auth/react";
