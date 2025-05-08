@@ -6,7 +6,7 @@ import Head from "next/head";
 /* import { headers } from "next/headers"; */
 /* import { getToken } from "next-auth/jwt"; */
 
-import { loadFonts } from "../../components/core/utils/loadFonts";
+/* import { loadFonts } from "../../components/core/utils/loadFonts"; */
 import { GetTheme } from "../../components/shared/functions/getTheme";
 import { GetPage } from "../../components/shared/functions/getPage";
 import { ThemeProvider } from "../../components/shared/contexts/ThemeContext";
@@ -27,7 +27,7 @@ const fetchTheme = async (href: string) => {
 };
 
 export default async function Page({ params }: any) {
-  const pathname = '/' + (params?.page?.join('/') ?? '');
+  const pathname = params ? '/' + (params?.page?.join('/') ?? '') : '/';
 
   console.log(pathname, '')
 /*   const headersList = headers();
@@ -36,9 +36,9 @@ export default async function Page({ params }: any) {
   const page = await fetchPage("foodbusters.stg.w3block.io" + pathname);
   const theme = await fetchTheme("foodbusters.stg.w3block.io" + pathname);
 
-  if (theme?.data?.configurations?.contentData?.customFonts)
+ /*  if (theme?.data?.configurations?.contentData?.customFonts)
     loadFonts(theme?.data?.configurations?.contentData?.customFonts);
-
+ */
   const metatags = {
     "property-og:title": {
       property: "og:title",
