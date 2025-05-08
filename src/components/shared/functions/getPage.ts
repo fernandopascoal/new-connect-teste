@@ -11,11 +11,13 @@ export async function GetPage(href: string) {
     process.env.NEXT_PUBLIC_ENVIRONMENT != "development"
       ? href.replace(
           "https://localhost:3000",
-          "https://foodbusters.com.br"
+          "https://foodbusters.stg.w3block.io"
         ) +
         "?t=" +
         Date.now()
       : href;
+
+      console.log(hrefNew, baseUrl, 'teste')
 
   /*   const headers: AxiosRequestHeaders = token
     ? {

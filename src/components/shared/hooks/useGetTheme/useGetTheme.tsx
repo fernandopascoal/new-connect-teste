@@ -17,7 +17,7 @@ export const useGetTheme = (disabled = false) => {
       //setHref('https://hashdex.stg.w3block.io/' + '?' + Date.now());
       setHref('https://foodbusters.com.br/?' + Date.now());
     } else {
-      setHref('https://foodbusters.com.br/?' + Date.now());
+      setHref('https://foodbusters.stg.w3block.io/?' + Date.now());
     }
   }, []);
 

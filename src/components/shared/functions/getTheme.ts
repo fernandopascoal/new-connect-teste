@@ -8,7 +8,7 @@ export async function GetTheme(href: string) {
   const hrefNew =
     process.env.NEXT_PUBLIC_ENVIRONMENT != "production" &&
     process.env.NEXT_PUBLIC_ENVIRONMENT != "development"
-      ? "https://foodbusters.com.br/?" + Date.now()
+      ? "https://foodbusters.stg.w3block.io/?" + Date.now()
       : href;
 
   return await getPublicAPI(baseUrl)
