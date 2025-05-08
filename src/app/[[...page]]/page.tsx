@@ -28,11 +28,13 @@ const fetchTheme = async (href: string) => {
 
 export default async function Page({ params }: any) {
   const pathname = '/' + (params?.page?.join('/') ?? '');
+
+  console.log(pathname, '')
 /*   const headersList = headers();
   const host = (await headersList).get("host"); */
 
-  const page = await fetchPage("foodbusters.com.br" + pathname);
-  const theme = await fetchTheme("foodbusters.com.br" + pathname);
+  const page = await fetchPage("foodbusters.stg.w3block.io" + pathname);
+  const theme = await fetchTheme("foodbusters.stg.w3block.io" + pathname);
 
   if (theme?.data?.configurations?.contentData?.customFonts)
     loadFonts(theme?.data?.configurations?.contentData?.customFonts);
