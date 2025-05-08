@@ -21,7 +21,7 @@ export const useAxios = (type: W3blockAPI) => {
 
   return useMemo(() => {
 
-    return getPublicAPI('https://commerce.stg.w3block.io');
+    return getPublicAPI('https://commerce.w3block.io');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseUrl]);
 };
