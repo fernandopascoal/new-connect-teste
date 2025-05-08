@@ -40,7 +40,7 @@ const StyleConnectConfigProvider = ({
     info: {},
     hosts: [
       {
-        hostname: "foodbusters.stg.w3block.io",
+        hostname: "foodbusters.com.br",
         isMain: true,
       },
     ],

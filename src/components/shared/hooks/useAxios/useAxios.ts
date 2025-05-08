@@ -7,9 +7,9 @@ import { usePixwayAPIURL } from '../usePixwayAPIURL/usePixwayAPIURL';
 export const useAxios = (type: W3blockAPI) => {
   const apisUrl = usePixwayAPIURL();
   const apiBaseURLMap = new Map([
-    [W3blockAPI.ID, apisUrl.w3blockIdAPIUrl],
+    [W3blockAPI.ID, "https://pixwayid.w3block.io/"],
     [W3blockAPI.KEY, apisUrl.w3blockKeyAPIUrl],
-    [W3blockAPI.COMMERCE, apisUrl.w3blockCommerceAPIUrl],
+    [W3blockAPI.COMMERCE, "https://commerce.w3block.io"],
     [W3blockAPI.POLL, apisUrl.w3BlockPollApiUrl],
     [W3blockAPI.PASS, apisUrl.w3BlockPassApiUrl],
   ]);
@@ -21,7 +21,7 @@ export const useAxios = (type: W3blockAPI) => {
 
   return useMemo(() => {
 
-    return getPublicAPI('https://commerce.stg.w3block.io');
+    return getPublicAPI('https://commerce.w3block.io');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseUrl]);
 };

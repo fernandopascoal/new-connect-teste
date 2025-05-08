@@ -13,10 +13,10 @@ export const useGetInfoByHostname = () => {
   const hostname =
     process.env.NEXT_PUBLIC_ENVIRONMENT != 'development' &&
     process.env.NEXT_PUBLIC_ENVIRONMENT != 'production'
-      ? 'foodbusters.stg.w3block.io' //'hashdex.stg.w3block.io'
+      ? 'foodbusters.com.br' //'hashdex.stg.w3block.io'
       : location;
   const apiUrl =
-    'https://pixwayid.stg.w3block.io/' + IdApiRoutes.TENANT_BY_HOSTNAME + '?hostname=' + hostname;
+    'https://pixwayid.w3block.io/' + IdApiRoutes.TENANT_BY_HOSTNAME + '?hostname=' + hostname;
 
   return useQuery(
     apiUrl,
