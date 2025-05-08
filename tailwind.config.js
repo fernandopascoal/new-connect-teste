@@ -1,9 +1,8 @@
 import colors from 'tailwindcss/colors';
 
 export const content = [
-    "./src/modules/**/*.{js,ts,tsx,jsx}",
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/w3block-new-lib/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,tsx,jsx}",
+    "./src/app/**/*.{js,ts,jsx,tsx}",
 ];
 export const theme = {
     screens: {
