@@ -17,7 +17,6 @@ import {
   Theme,
 } from "../../interfaces";
 
-import { ThemeContext } from "../../contexts/ThemeContext";
 import { useEffectOnce, useLocation } from "react-use";
 import { useRouterConnect } from "../../hooks/useRouterConnect";
 import { PixwayAppRoutes } from "../../enums/PixwayAppRoutes";
@@ -39,7 +38,9 @@ import {
   StorefrontMenu,
   Products,
   StorefrontHeader,
+  ThemeContext,
 } from "w3block-new-lib";
+
 import { useLocale } from "../../hooks/useLocale";
 import { getProductSlug } from "../../../core/utils/getProductSlug";
 import classNames from "classnames";
@@ -283,6 +284,8 @@ export const StorefrontPreview = ({ children }: StorefrontPreviewProps) => {
                       item.languageType !== "all"
                     )
                       return null;
+
+                      console.log(item, 'item')
 
                     switch (item.type) {
                       case ModulesType.CATEGORIES:

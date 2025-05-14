@@ -11,7 +11,7 @@ import { modifyStringPath } from '../../utils/modifyStringPath';
 import { unescapeHtml } from '../../utils/unescapeHtml';
 import { useDynamicApi } from '../../providers/DynamicApiProvider';
 import { UseThemeConfig } from '../useThemeConfig/useThemeConfig';
-import { IThemeContext } from '../../contexts/ThemeContext';
+import { IThemeContext } from '../../contexts/ThemeProvider';
 
 
 export const useDynamicString = (input: string | undefined) => {
