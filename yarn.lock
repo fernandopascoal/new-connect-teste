@@ -2005,6 +2005,18 @@
     "@swc/helpers" "^0.5.0"
     clsx "^2.0.0"
 
+"@react-input/core@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@react-input/core/-/core-2.0.2.tgz#c7094c5ab955e740d4c34777688aff54785024a1"
+  integrity sha512-xLLBueYFbant9308uv3cIJQz5NYSixeGspjP3Nt6jogRHTcHYMRmlVFUuSzQiP8Z8/5BdnPkudRSsN0/AJ1fbw==
+
+"@react-input/mask@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@react-input/mask/-/mask-2.0.4.tgz#0a8df2694962ac10a76a329469d91f6ed01037b8"
+  integrity sha512-NOielvQSBOlGLVuEcxtkjaGneC0GJFXjC7KOF99ed9H9XSDruWnQirjht5uSbWqLeeiOup0VD2YjM+6FH+aWBg==
+  dependencies:
+    "@react-input/core" "^2.0.2"
+
 "@react-stately/flags@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@react-stately/flags/-/flags-3.1.1.tgz#c47d540c4196798f4cc0ee83f844099b4d57b876"
@@ -4701,13 +4713,6 @@ internal-slot@^1.1.0:
     hasown "^2.0.2"
     side-channel "^1.1.0"
 
-invariant@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
-  integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
-  dependencies:
-    loose-envify "^1.0.0"
-
 ipaddr.js@1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
@@ -5217,7 +5222,7 @@ logrocket@^10.0.0:
   resolved "https://registry.yarnpkg.com/logrocket/-/logrocket-10.0.0.tgz#18f83853e47abd60940b6a1c984c8dc4d1512b70"
   integrity sha512-LUTWvqy9Xz+ejbPaPr0vBmlgzGRY5DVO0Kvx3xgo0L77RrRgNzyDBRi/gI4iu6H2xznVuxMAOS3nMwIamjcDwQ==
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
+loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -6133,14 +6138,6 @@ react-i18next@^15.4.1, react-i18next@^15.5.1:
   dependencies:
     "@babel/runtime" "^7.25.0"
     html-parse-stringify "^3.0.1"
-
-react-input-mask@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/react-input-mask/-/react-input-mask-2.0.4.tgz#9ade5cf8196f4a856dbf010820fe75a795f3eb14"
-  integrity sha512-1hwzMr/aO9tXfiroiVCx5EtKohKwLk/NT8QlJXHQ4N+yJJFyUuMT+zfTpLBwX/lK3PkuMlievIffncpMZ3HGRQ==
-  dependencies:
-    invariant "^2.2.4"
-    warning "^4.0.2"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -7297,14 +7294,15 @@ void-elements@3.1.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==
 
-w3block-new-lib@^1.0.28:
-  version "1.0.28"
-  resolved "https://registry.yarnpkg.com/w3block-new-lib/-/w3block-new-lib-1.0.28.tgz#0257d1546fde7ce806bb7f81e0cf09ad65cef15b"
-  integrity sha512-FkLFQkLG2btfoWdSBkDnyT31h28snNwQUwatylq6rFWjBugxg9biFmTRb5nRj4t0soWLDBi1T7CnClX8ukhwUA==
+w3block-new-lib@^1.0.30:
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/w3block-new-lib/-/w3block-new-lib-1.0.30.tgz#6772376804fed05bb26875380bd407e9572882bb"
+  integrity sha512-r7OLb+kZpEjS/lrN0tQBuGftHc71caJfjlnnjukq1cfICJ0sDuiA+uQovLFaDTJv1iS9bYg/lMxIcGmMD279og==
   dependencies:
     "@ethersproject/bignumber" "^5.8.0"
     "@headlessui/react" "^2.2.2"
     "@metamask/detect-provider" "^2.0.0"
+    "@react-input/mask" "^2.0.4"
     "@szhsin/react-menu" "^4.4.0"
     "@w3block/sdk-id" "^0.1.88"
     axios "^1.9.0"
@@ -7315,19 +7313,11 @@ w3block-new-lib@^1.0.28:
     jwt-decode "^4.0.0"
     lodash "^4.17.21"
     react-i18next "^15.5.1"
-    react-input-mask "^2.0.4"
     react-query "^3.39.3"
     react-use "^17.6.0"
     rimraf "^5.0.10"
     socket.io-client "^4.8.1"
     swiper "^11.2.6"
-
-warning@^4.0.2:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
-  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
-  dependencies:
-    loose-envify "^1.0.0"
 
 which-boxed-primitive@^1.1.0, which-boxed-primitive@^1.1.1:
   version "1.1.1"

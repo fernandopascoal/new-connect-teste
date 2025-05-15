@@ -38,20 +38,24 @@ export const ThemeProvider = ({
   upperPage?: TemplateData | null;
   upperPageInfo?: GetPageInfoInterface | undefined;
 }) => {
-  console.log(upperTheme, "upperTheme")
-  const [defaultTheme, setDefaultTheme] = useState<Theme | null>(upperTheme ? upperTheme : null);
-  const [pageInfo, setPageInfo] = useState<GetPageInfoInterface | undefined>(upperPageInfo ? upperPageInfo : undefined);
-  const [pageTheme, setPageTheme] = useState<TemplateData | null>(upperPage ? upperPage : null);
+  const [defaultTheme, setDefaultTheme] = useState<Theme | null>(
+    upperTheme ? upperTheme : null
+  );
+  const [pageInfo, setPageInfo] = useState<GetPageInfoInterface | undefined>(
+    upperPageInfo ? upperPageInfo : undefined
+  );
+  const [pageTheme, setPageTheme] = useState<TemplateData | null>(
+    upperPage ? upperPage : null
+  );
   const [pageThemeSession, setPageThemeSession] =
     useSessionStorage<TemplateData | null>(BASE_THEME_KEY);
   const [, setPageName] = useState("");
 
   useEffect(() => {
     if (upperTheme) {
-      console.log(upperTheme, 'upperTheme')
       setDefaultTheme(upperTheme);
     } else {
-      console.log("sem upperTheme")
+      console.log("sem upperTheme");
     }
   }, [upperTheme]);
 
@@ -80,12 +84,10 @@ export const ThemeProvider = ({
     if (theme) {
       setDefaultTheme(theme.data);
       setPageThemeSession(theme.data);
-      console.log(theme, 'theme')
     } else if (isThemeError) {
       setPageTheme(pageThemeSession);
-      console.log(isThemeError, 'error')
     } else {
-      console.log("sem theme")
+      console.log("sem theme");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, isThemeError]);

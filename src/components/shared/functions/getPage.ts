@@ -6,7 +6,9 @@ export async function GetPage(href: string) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const baseUrl = useGetApiUrl(W3blockAPI.COMMERCE);
 
-  const hrefNew = "https://foodbusters.w3block.io"
+  console.log(href)
+
+  const hrefNew = "https://zuca.ai"
    /*  process.env.NEXT_PUBLIC_ENVIRONMENT != "production" &&
     process.env.NEXT_PUBLIC_ENVIRONMENT != "development"
       ? href.replace(

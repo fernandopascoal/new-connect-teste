@@ -9,9 +9,10 @@ import _ from 'lodash';
 
 import { modifyStringPath } from '../../utils/modifyStringPath';
 import { unescapeHtml } from '../../utils/unescapeHtml';
-import { useDynamicApi } from '../../providers/DynamicApiProvider';
+
 import { UseThemeConfig } from '../useThemeConfig/useThemeConfig';
-import { IThemeContext } from '../../contexts/ThemeProvider';
+import { IThemeContext, useDynamicApi } from 'w3block-new-lib';
+
 
 
 export const useDynamicString = (input: string | undefined) => {

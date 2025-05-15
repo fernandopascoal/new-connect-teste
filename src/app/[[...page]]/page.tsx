@@ -36,7 +36,6 @@ export default async function Page({ params }: any) {
   const page = await fetchPage("foodbusters.stg.w3block.io" + pathname);
   const theme = await fetchTheme("foodbusters.stg.w3block.io" + pathname);
 
-  console.log(theme ? "Theme SSR" : "Sem Thema")
 
  /*  if (theme?.data?.configurations?.contentData?.customFonts)
     loadFonts(theme?.data?.configurations?.contentData?.customFonts);

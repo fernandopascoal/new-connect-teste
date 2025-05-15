@@ -24,7 +24,6 @@ import {
   breakpointsEnum,
   useBreakpoints,
 } from "../../hooks/useBreakpoints/useBreakpoints";
-import { DynamicApiProvider } from "../../providers/DynamicApiProvider";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
 import {
   Banner,
@@ -39,6 +38,8 @@ import {
   Products,
   StorefrontHeader,
   ThemeContext,
+  StorefrontFooter,
+  DynamicApiProvider,
 } from "w3block-new-lib";
 
 import { useLocale } from "../../hooks/useLocale";
@@ -211,11 +212,11 @@ export const StorefrontPreview = ({ children }: StorefrontPreviewProps) => {
       ? mergedConfigStyleData?.hasHeader
       : true;
 
-/*   const hasFooterDefault =
+const hasFooterDefault =
     mergedConfigStyleData?.hasFooter != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasFooter
-      : true; */
+      : true; 
   data = {
     ...data,
     dynamicApi,
@@ -285,8 +286,6 @@ export const StorefrontPreview = ({ children }: StorefrontPreviewProps) => {
                     )
                       return null;
 
-                      console.log(item, 'item')
-
                     switch (item.type) {
                       case ModulesType.CATEGORIES:
                         return (
@@ -353,6 +352,21 @@ export const StorefrontPreview = ({ children }: StorefrontPreviewProps) => {
                 </div>
               )}
             </>
+          )}
+           {hasFooterDefault && (
+            <StorefrontFooter
+              data={
+                theme.footer ?? {
+                  id: '',
+                  name: 'footer',
+                  type: ModulesType.FOOTER,
+                  styleData: {},
+                  contentData: {},
+                  mobileStyleData: {},
+                  mobileContentData: {},
+                }
+              }
+            />
           )}
         </div>
       </DynamicApiProvider>
