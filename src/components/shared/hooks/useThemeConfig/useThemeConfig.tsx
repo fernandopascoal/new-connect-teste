@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../../contexts/ThemeProvider';
+import { ThemeContext } from 'w3block-new-lib';
+
 
 
 
