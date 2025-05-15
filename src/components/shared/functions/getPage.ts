@@ -3,11 +3,12 @@ import { W3blockAPI } from "../../core/enums/w3BlockAPI";
 import { useGetApiUrl } from "../../core/hooks/useGetApiUrl/useGetApiUrl";
 
 export async function GetPage(href: string) {
-  console.log(href, 'getPage')
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const baseUrl = useGetApiUrl(W3blockAPI.COMMERCE);
 
-  const hrefNew = "https://foodbusters.com.br"
+  console.log(href)
+
+  const hrefNew = "https://zuca.ai"
    /*  process.env.NEXT_PUBLIC_ENVIRONMENT != "production" &&
     process.env.NEXT_PUBLIC_ENVIRONMENT != "development"
       ? href.replace(
@@ -18,7 +19,6 @@ export async function GetPage(href: string) {
         Date.now()
       : href;
  */
-      console.log(hrefNew, baseUrl, 'teste')
 
   /*   const headers: AxiosRequestHeaders = token
     ? {
@@ -32,7 +32,6 @@ export async function GetPage(href: string) {
   return await getPublicAPI(baseUrl)
     .get("/projects/get-page" + `?url=${hrefNew}?t=${Date.now()}`)
     .then((data) => {
-      console.log(data, 'data mss')
       return data.data;
     })
     .catch((e) => {

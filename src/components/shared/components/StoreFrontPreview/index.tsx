@@ -17,7 +17,6 @@ import {
   Theme,
 } from "../../interfaces";
 
-import { ThemeContext } from "../../contexts/ThemeContext";
 import { useEffectOnce, useLocation } from "react-use";
 import { useRouterConnect } from "../../hooks/useRouterConnect";
 import { PixwayAppRoutes } from "../../enums/PixwayAppRoutes";
@@ -25,7 +24,6 @@ import {
   breakpointsEnum,
   useBreakpoints,
 } from "../../hooks/useBreakpoints/useBreakpoints";
-import { DynamicApiProvider } from "../../providers/DynamicApiProvider";
 import { convertSpacingToCSS } from "../../utils/convertSpacingToCSS";
 import {
   Banner,
@@ -39,7 +37,11 @@ import {
   StorefrontMenu,
   Products,
   StorefrontHeader,
+  ThemeContext,
+  StorefrontFooter,
+  DynamicApiProvider,
 } from "w3block-new-lib";
+
 import { useLocale } from "../../hooks/useLocale";
 import { getProductSlug } from "../../../core/utils/getProductSlug";
 import classNames from "classnames";
@@ -210,11 +212,11 @@ export const StorefrontPreview = ({ children }: StorefrontPreviewProps) => {
       ? mergedConfigStyleData?.hasHeader
       : true;
 
-/*   const hasFooterDefault =
+const hasFooterDefault =
     mergedConfigStyleData?.hasFooter != undefined &&
     (asPath || "").includes("/auth/")
       ? mergedConfigStyleData?.hasFooter
-      : true; */
+      : true; 
   data = {
     ...data,
     dynamicApi,
@@ -350,6 +352,21 @@ export const StorefrontPreview = ({ children }: StorefrontPreviewProps) => {
                 </div>
               )}
             </>
+          )}
+           {hasFooterDefault && (
+            <StorefrontFooter
+              data={
+                theme.footer ?? {
+                  id: '',
+                  name: 'footer',
+                  type: ModulesType.FOOTER,
+                  styleData: {},
+                  contentData: {},
+                  mobileStyleData: {},
+                  mobileContentData: {},
+                }
+              }
+            />
           )}
         </div>
       </DynamicApiProvider>

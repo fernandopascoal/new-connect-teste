@@ -9,8 +9,9 @@ import Head from "next/head";
 /* import { loadFonts } from "../../components/core/utils/loadFonts"; */
 import { GetTheme } from "../../components/shared/functions/getTheme";
 import { GetPage } from "../../components/shared/functions/getPage";
-import { ThemeProvider } from "../../components/shared/contexts/ThemeContext";
+
 import { StorefrontPreview } from "../../components/shared/components/StoreFrontPreview";
+import { ThemeProvider } from "../../components/shared/providers/ThemeProvider";
 
 const fetchPage = async (href: string) => {
   const transformHost = href.includes("http") ? href : `https://${href}`;
@@ -29,12 +30,12 @@ const fetchTheme = async (href: string) => {
 export default async function Page({ params }: any) {
   const pathname = params ? '/' + (params?.page?.join('/') ?? '') : '/';
 
-  console.log(pathname, '')
 /*   const headersList = headers();
   const host = (await headersList).get("host"); */
 
   const page = await fetchPage("foodbusters.stg.w3block.io" + pathname);
   const theme = await fetchTheme("foodbusters.stg.w3block.io" + pathname);
+
 
  /*  if (theme?.data?.configurations?.contentData?.customFonts)
     loadFonts(theme?.data?.configurations?.contentData?.customFonts);
@@ -89,13 +90,13 @@ export default async function Page({ params }: any) {
             rel="icon"
             type="image/x-icon"
             href={
-              theme?.themeData.data.configurations.styleData.favicon.assetUrl
+              theme?.themeData?.data?.configurations?.styleData?.favicon?.assetUrl
             }
           />
         )}
         {theme?.themeData?.data?.configurations?.styleData?.siteTitle && (
           <title>
-            {theme?.themeData.data.configurations.styleData.siteTitle}
+            {theme?.themeData?.data?.configurations?.styleData?.siteTitle}
           </title>
         )}
       </Head>
