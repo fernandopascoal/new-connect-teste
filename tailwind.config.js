@@ -1,6 +1,7 @@
 import colors from 'tailwindcss/colors';
 
 export const content = [
+    "./src/modules/**/*.{js,ts,tsx,jsx}",
     "./src/components/**/*.{js,ts,tsx,jsx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
 ];
