@@ -7,11 +7,13 @@ import Head from "next/head";
 /* import { getToken } from "next-auth/jwt"; */
 
 /* import { loadFonts } from "../../components/core/utils/loadFonts"; */
-import { GetTheme } from "../../components/shared/functions/getTheme";
-import { GetPage } from "../../components/shared/functions/getPage";
+import { GetTheme } from "../../modules/shared/functions/getTheme";
+import { GetPage } from "../../modules/shared/functions/getPage";
 
-import { StorefrontPreview } from "../../components/shared/components/StoreFrontPreview";
-import { ThemeProvider } from "../../components/shared/providers/ThemeProvider";
+import { StorefrontPreview } from "../../modules/shared/components/StoreFrontPreview";
+import { ThemeProvider } from "../../modules/shared/providers/ThemeProvider";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 const fetchPage = async (href: string) => {
   const transformHost = href.includes("http") ? href : `https://${href}`;
@@ -30,11 +32,16 @@ const fetchTheme = async (href: string) => {
 export default async function Page({ params }: any) {
   const pathname = params ? '/' + (params?.page?.join('/') ?? '') : '/';
 
+  
+     const session = await getServerSession(authOptions);
+
+     console.log(session, 'session')
+
 /*   const headersList = headers();
   const host = (await headersList).get("host"); */
 
-  const page = await fetchPage("foodbusters.stg.w3block.io" + pathname);
-  const theme = await fetchTheme("foodbusters.stg.w3block.io" + pathname);
+  const page = await fetchPage("foodbusters.w3block.io" + pathname);
+  const theme = await fetchTheme("foodbusters.w3block.io" + pathname);
 
 
  /*  if (theme?.data?.configurations?.contentData?.customFonts)
