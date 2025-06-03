@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import NextAuth, { AuthOptions } from "next-auth";
-import { getNextAuthConfig } from "w3block-new-lib/nextAuth";
+import getNextAuthConfig from "../../functions/onGetNextAuthConfig";
+
+
 
 export const authOptions = getNextAuthConfig({
   baseURL: process.env.NEXT_PUBLIC_PIXWAY_ID_API_URL ?? "",

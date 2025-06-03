@@ -7006,10 +7006,10 @@ void-elements@3.1.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==
 
-w3block-new-lib@^1.0.31:
-  version "1.0.31"
-  resolved "https://registry.yarnpkg.com/w3block-new-lib/-/w3block-new-lib-1.0.31.tgz#ce78edbd431f8dc8f2488614128e2af12d7b1017"
-  integrity sha512-7l+WoB6yLD3WjpLkCWCjtJoZsYb6pZDmhkVC6ZtMGEHezdS7q+drETxdI6JthIt9PCDY2u/qOPF7boGzp2xvew==
+w3block-new-lib@^1.0.32:
+  version "1.0.32"
+  resolved "https://registry.yarnpkg.com/w3block-new-lib/-/w3block-new-lib-1.0.32.tgz#a0d9ff1f19f3a3bdc787715cfa8871b3f9066cf0"
+  integrity sha512-k0McmnKl4lXAeW6xpYNb/lCbg6/d/vmU11GxlYWJRp9Mnc13F6H038tcwWfjoCNzIqSLBtBinPDFrmPODzCb/A==
   dependencies:
     "@ethersproject/bignumber" "^5.8.0"
     "@headlessui/react" "^2.2.2"
