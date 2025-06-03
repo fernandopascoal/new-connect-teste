@@ -33,6 +33,7 @@ export enum FormatFilterType {
   WALLET = 'wallet',
 }
 
+
 export interface TableStylesClasses {
   root?: any;
   header?: any;
