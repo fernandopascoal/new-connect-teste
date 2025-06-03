@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import "w3block-new-lib/dist/style.css";
-import "../../styles/globals.css"
-import { PageProvider } from "../components/core/components/PageProvider";
+import "../../styles/globals.css";
+import { PageProvider } from "../modules/core/components/PageProvider";
 
 const metadata = {
   title: "My App",
@@ -9,11 +9,10 @@ const metadata = {
 };
 
 export default async function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <head>
