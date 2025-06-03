@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { W3blockAPI } from "../../enums/W3blockAPI";
+
+import { W3blockAPI } from "../../../core/enums/w3BlockAPI";
+
 
 
 export enum FilterTableType {
